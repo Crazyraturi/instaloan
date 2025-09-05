@@ -7,17 +7,8 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// ================= Fade-in Animation =================
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("animate");
-    });
-  },
-  { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-);
 
-document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
 
 // ================= Loan Calculator =================
 function formatCurrency(amount) {
@@ -1002,3 +993,88 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+  function animateCounter(element, target, suffix = "") {
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(increment * step, target);
+
+      if (target >= 1000) {
+        // Format large numbers with commas
+        element.textContent = Math.floor(current).toLocaleString() + suffix;
+      } else {
+        element.textContent = Math.floor(current) + suffix;
+      }
+
+      if (step >= steps) {
+        clearInterval(timer);
+        // Ensure final value is exact
+        if (target >= 1000) {
+          element.textContent = target.toLocaleString() + suffix;
+        } else {
+          element.textContent = target + suffix;
+        }
+      }
+    }, duration / steps);
+  }
+
+  // Intersection Observer for triggering animations when in view
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: "0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const statItems = entry.target.querySelectorAll(".stat-item");
+
+        statItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add("animated");
+
+            const numberElement = item.querySelector(".stat-number");
+            const target = parseInt(numberElement.dataset.target);
+            const suffix = numberElement.dataset.suffix || "";
+
+            animateCounter(numberElement, target, suffix);
+          }, index * 200); // Stagger the animations
+        });
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Start observing when page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const statsContainer = document.querySelector(".stats-container");
+    observer.observe(statsContainer);
+  });
+
+  // Add click event to Know More button
+  document.querySelector(".know-more-btn").addEventListener("click", () => {
+    alert(
+      "Know More button clicked! You can add your custom functionality here."
+    );
+  });
+
+  // Add hover effects for additional interactivity
+  document.querySelectorAll(".stat-item").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const number = item.querySelector(".stat-number");
+      number.style.transform = "scale(1.05)";
+      number.style.transition = "transform 0.3s ease";
+    });
+
+    item.addEventListener("mouseleave", () => {
+      const number = item.querySelector(".stat-number");
+      number.style.transform = "scale(1)";
+    });
+  });
