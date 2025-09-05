@@ -1193,7 +1193,7 @@ body {
   overflow: hidden;
 }
 
-.testimonial-hero-container::before {
+.::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1217,7 +1217,7 @@ body {
   display: flex;
   align-items: center;
   gap: 4rem;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   position: relative;
   z-index: 1;
