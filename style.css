@@ -116,7 +116,7 @@ body {
   gap: 2rem;
   flex-wrap: wrap;
   padding: 2rem 5%;
-  min-height: 80vh;  /* full screen */
+  min-height: 90vh;  /* full screen */
   box-sizing: border-box;
 
   /* 👇 light blue gradient background */
