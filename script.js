@@ -517,7 +517,7 @@ Other T&C
 5. PAN and Aadhaar should be available.
 6. Date of Birth on PAN and Aadhaar should match.
 7. User must apply from their own device and mobile number.
-8. No loan/credit defaults or write-offs should be there.
+8. No loan/credit defaults or write-offs should be there;
 9. No delays in other loan/credit payments.
 10. Address should be complete, with no short forms, and include proper landmarks.
 11. The name on all documents should be the same.
@@ -969,4 +969,36 @@ document.getElementById('viewMoreBtn').addEventListener('click', function() {
 document.addEventListener('DOMContentLoaded', function() {
   currentIndex = 0;
   renderPersonalLoanCards();
+});
+
+// ================= Loan Modal =================
+function openLoanModal(vendorName, interestRate) {
+  document.getElementById('loanModal').style.display = 'block';
+  document.getElementById('modalVendorName').textContent = vendorName;
+  document.getElementById('modalInterestRate').textContent = interestRate;
+}
+
+function closeLoanModal() {
+  document.getElementById('loanModal').style.display = 'none';
+}
+
+// Close modal when clicking outside content
+window.addEventListener('click', function(e) {
+  const modal = document.getElementById('loanModal');
+  if (e.target === modal) {
+    closeLoanModal();
+  }
+});
+
+// Handle form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('loanApplicationForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Application submitted! Thank you.');
+      closeLoanModal();
+      form.reset();
+    });
+  }
 });
