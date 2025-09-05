@@ -597,7 +597,7 @@ Other T&C
 1. Customer must have an HDFC Bank Credit Card.
 2. No past delay in Credit Card payments.
 3. No ongoing loan or EMI on the Credit Card.
-4. Loan amount should be more than or equal to ₹25,000.
+4. Loan amount should be more than or equal to ₹25,000;
 5. PAN and Aadhaar should be available.
 6. Date of Birth on PAN and Aadhaar should match.
 7. User must apply from their own device and mobile number.
@@ -938,4 +938,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.querySelector(`[href="#${e.target.id}"]`);
     toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-down"></i>';
   });
+});
+
+let currentIndex = 0;
+const cardsPerPage = 7;
+
+function renderPersonalLoanCards() {
+  const container = document.getElementById('personalLoansContainer');
+  container.innerHTML = '';
+  const vendors = loanData.personal;
+  const end = Math.min(currentIndex + cardsPerPage, vendors.length);
+  for (let i = 0; i < end; i++) {
+    container.innerHTML += createLoanCard(vendors[i], i, "personal");
+  }
+  // Show/hide View More button
+  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  if (end < vendors.length) {
+    viewMoreBtn.style.display = 'block';
+  } else {
+    viewMoreBtn.style.display = 'none';
+  }
+}
+
+document.getElementById('viewMoreBtn').addEventListener('click', function() {
+  currentIndex += cardsPerPage;
+  renderPersonalLoanCards();
+});
+
+// Initial render
+document.addEventListener('DOMContentLoaded', function() {
+  currentIndex = 0;
+  renderPersonalLoanCards();
 });
