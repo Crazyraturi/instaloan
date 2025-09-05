@@ -1,0 +1,941 @@
+// ================= Smooth Scrolling =================
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+// ================= Fade-in Animation =================
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("animate");
+    });
+  },
+  { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+);
+
+document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+// ================= Loan Calculator =================
+function formatCurrency(amount) {
+  return "₹" + amount.toLocaleString("en-IN");
+}
+
+function formatLargeAmount(amount) {
+  if (amount >= 1e7) return `₹${(amount / 1e7).toFixed(1)}Cr`;
+  if (amount >= 1e5) return `₹${(amount / 1e5).toFixed(1)}L`;
+  return formatCurrency(amount);
+}
+
+function calculateEMI(principal, rate, tenure) {
+  const monthlyRate = rate / (12 * 100);
+  if (monthlyRate === 0) return principal / tenure;
+  return (
+    (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
+    (Math.pow(1 + monthlyRate, tenure) - 1)
+  );
+}
+
+function updateChart(principal, interest) {
+  const principalArc = document.getElementById("principalArc");
+  const interestArc = document.getElementById("interestArc");
+
+  if (!principalArc || !interestArc) return;
+
+  const total = principal + interest;
+  if (total <= 0) return;
+
+  const circumference = 2 * Math.PI * 80; // radius = 80
+  const principalLength = (principal / total) * circumference;
+  const interestLength = (interest / total) * circumference;
+
+  // ✅ Update principal arc
+  principalArc.style.strokeDasharray = `${principalLength} ${circumference}`;
+  principalArc.style.strokeDashoffset = "0";
+
+  // ✅ Update interest arc after principal arc
+  interestArc.style.strokeDasharray = `${interestLength} ${circumference}`;
+  interestArc.style.strokeDashoffset = `-${principalLength}`;
+}
+
+function updateCalculations() {
+  const loanAmountSlider = document.getElementById("loanAmount");
+  const tenureSlider = document.getElementById("tenure");
+  const interestRateSlider = document.getElementById("interestRate");
+
+  if (!loanAmountSlider || !tenureSlider || !interestRateSlider) return;
+
+  // ✅ Convert slider values into numbers
+  const principal = parseFloat(loanAmountSlider.value) || 0;
+  const tenure = parseInt(tenureSlider.value) || 0;
+  const rate = parseFloat(interestRateSlider.value) || 0;
+
+  // Displays
+  const loanAmountDisplay = document.getElementById("loanAmountDisplay");
+  const tenureDisplay = document.getElementById("tenureDisplay");
+  const interestRateDisplay = document.getElementById("interestRateDisplay");
+  const monthlyEMI = document.getElementById("monthlyEMI");
+  const totalInterest = document.getElementById("totalInterest");
+  const totalPayable = document.getElementById("totalPayable");
+
+  if (loanAmountDisplay)
+    loanAmountDisplay.textContent = formatLargeAmount(principal);
+  if (tenureDisplay)
+    tenureDisplay.textContent =
+      tenure > 12
+        ? `${Math.floor(tenure / 12)} Years ${tenure % 12} Months`
+        : `${tenure} Months`;
+  if (interestRateDisplay) interestRateDisplay.textContent = `${rate}%`;
+
+  // ✅ EMI calculation
+  const emi = calculateEMI(principal, rate, tenure);
+  const totalAmount = emi * tenure;
+  const totalInterestAmount = totalAmount - principal;
+
+  // ✅ Update text values
+  if (monthlyEMI) monthlyEMI.textContent = formatCurrency(Math.round(emi));
+  if (totalInterest)
+    totalInterest.textContent = formatLargeAmount(
+      Math.round(totalInterestAmount)
+    );
+  if (totalPayable)
+    totalPayable.textContent = formatLargeAmount(Math.round(totalAmount));
+
+  // ✅ Update chart with principal vs interest
+  updateChart(principal, totalInterestAmount);
+  // ✅ Update chart
+  updateChart(principal, totalInterestAmount);
+}
+
+// ================= DOM Ready =================
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("App Initialized");
+
+  // Loan Calculator listeners
+  document
+    .getElementById("loanAmount")
+    ?.addEventListener("input", updateCalculations);
+  document
+    .getElementById("tenure")
+    ?.addEventListener("input", updateCalculations);
+  document
+    .getElementById("interestRate")
+    ?.addEventListener("input", updateCalculations);
+
+  updateCalculations();
+
+  // Apply button
+  document.querySelector(".apply-button")?.addEventListener("click", () => {
+    alert("Redirecting to loan application form...");
+  });
+
+  // Modal close listeners
+  window.addEventListener("click", (e) => {
+    const modal = document.getElementById("loanModal");
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Carousel Init
+  const loanCarousel = document.querySelector("#loanCarousel");
+  if (loanCarousel && typeof bootstrap !== "undefined") {
+    const bsLoanCarousel = new bootstrap.Carousel(loanCarousel, {
+      interval: 4000,
+      wrap: true,
+    });
+    loanCarousel.addEventListener("mouseenter", () => bsLoanCarousel.pause());
+    loanCarousel.addEventListener("mouseleave", () => bsLoanCarousel.cycle());
+  }
+  if (
+    document.querySelector("#featuresCarousel") &&
+    typeof bootstrap !== "undefined"
+  )
+    new bootstrap.Carousel("#featuresCarousel", { interval: 8000, wrap: true });
+  if (
+    document.querySelector("#customerCarousel") &&
+    typeof bootstrap !== "undefined"
+  )
+    new bootstrap.Carousel("#customerCarousel", { interval: 5000, wrap: true });
+
+  // Feature card click effect
+  document.querySelectorAll(".feature-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.style.transform = "scale(0.95)";
+      setTimeout(() => (card.style.transform = ""), 150);
+    });
+  });
+
+  // Testimonials
+  initializeTestimonials();
+
+  // Typing effect
+  if (document.getElementById("typingText")) setTimeout(typeEffect, 1000);
+
+  // Show/hide back to top button on scroll
+  window.addEventListener("scroll", function () {
+    const btn = document.getElementById("backToTopBtn");
+    if (window.scrollY > 300) {
+      btn.style.display = "flex";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  // Hide by default
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("backToTopBtn");
+    if (btn) btn.style.display = "none";
+  });
+});
+
+// ================= Testimonials =================
+const testimonialData = [
+  {
+    name: "Ramesh Iyer",
+    role: "Marketing Manager",
+    image:
+      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1170&auto=format&fit=crop",
+    text: "I was impressed by the clarity and speed of service. Comparing offers from multiple lenders helped me find the best deal.",
+  },
+  {
+    name: "Sarah Johnson",
+    role: "Business Owner",
+    image:
+      "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=687&auto=format&fit=crop",
+    text: "The team exceeded our expectations with their professionalism and quick turnaround. Highly recommended.",
+  },
+  {
+    name: "Michael Chen",
+    role: "Product Director",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    text: "Working with this company transformed our business operations. Customer-first mentality sets them apart.",
+  },
+];
+
+let currentTestimonialIndex = 0;
+
+function updateTestimonialDisplay() {
+  const current = testimonialData[currentTestimonialIndex];
+  document.querySelector(".testimonial-client-info h3").textContent =
+    current.name;
+  document.querySelector(".testimonial-client-role").textContent = current.role;
+  document.querySelector(".testimonial-avatar-image").src = current.image;
+  document.querySelector(".testimonial-review-text").textContent = current.text;
+  document
+    .querySelectorAll(".testimonial-nav-dot")
+    .forEach((dot, i) =>
+      dot.classList.toggle("active-dot", i === currentTestimonialIndex)
+    );
+}
+
+function nextTestimonial() {
+  currentTestimonialIndex =
+    (currentTestimonialIndex + 1) % testimonialData.length;
+  updateTestimonialDisplay();
+}
+
+function prevTestimonial() {
+  currentTestimonialIndex =
+    (currentTestimonialIndex - 1 + testimonialData.length) %
+    testimonialData.length;
+  updateTestimonialDisplay();
+}
+
+function initializeTestimonials() {
+  document
+    .getElementById("nextBtn")
+    ?.addEventListener("click", nextTestimonial);
+  document
+    .getElementById("prevBtn")
+    ?.addEventListener("click", prevTestimonial);
+
+  document.querySelectorAll(".testimonial-nav-dot").forEach((dot, i) =>
+    dot.addEventListener("click", () => {
+      currentTestimonialIndex = i;
+      updateTestimonialDisplay();
+    })
+  );
+
+  setInterval(nextTestimonial, 6000);
+  updateTestimonialDisplay();
+}
+
+// ================= Typing Effect =================
+const words = ["Gold Loan", "Personal Loan", "Business Loan", "Home Loan"];
+let currentWordIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+  const typingElement = document.getElementById("typingText");
+  if (!typingElement) return;
+
+  const currentWord = words[currentWordIndex];
+
+  typingElement.textContent = isDeleting
+    ? currentWord.substring(0, currentCharIndex--)
+    : currentWord.substring(0, currentCharIndex++);
+
+  let speed = isDeleting ? 75 : 150;
+
+  if (!isDeleting && currentCharIndex === currentWord.length) {
+    speed = 2000;
+    isDeleting = true;
+  } else if (isDeleting && currentCharIndex === 0) {
+    isDeleting = false;
+    currentWordIndex = (currentWordIndex + 1) % words.length;
+    speed = 500;
+  }
+
+  setTimeout(typeEffect, speed);
+}
+
+// ================= FAQ Toggle =================
+function toggleFaq(link) {
+  const faq = link.nextElementSibling;
+  if (faq.style.display === "none" || faq.style.display === "") {
+    faq.style.display = "block";
+    link.textContent = "Hide Details -";
+  } else {
+    faq.style.display = "none";
+    link.textContent = "Detailed Offers +";
+  }
+}
+
+const loanData = {
+  personal: [
+    {
+      name: "Poonawalla Fincorp",
+      link: "https://instant-pocket-loan.poonawallafincorp.com/?utm_DSA_Code=PKA00192&UTM_Partner_Name=BuddyLoan&UTM_Partner_Medium=digiloans&UTM_Partner_AgentCode=DSA&UTM_Partner_ReferenceID=PK2002",
+      image: "./images/punewala.svg",
+    },
+    {
+      name: "Lendingplate",
+      link: "https://loan.indiasales.club?productCode=LPL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=480&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/lendingplate.png",
+    },
+    {
+      name: "Prefr",
+      link: "https://marketplace.prefr.com/buddyloan?utm_source=buddyloan&utm_medium=digiloans&utm_content=content1&utm_campaign=DSA",
+      image: "./images/prif.avif",
+    },
+    {
+      name: "KreditBee",
+      link: "https://loan.indiasales.club?productCode=KREDITBEE&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=269&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/kriditbee.svg",
+    },
+    {
+      name: "Unity SFB",
+      link: "https://loans.theunitybank.com/unity-pl-ui/page/exclusion/login/logindetails?utm_source=buddyloan&utm_medium=digiloans&utm_campaign=DSA",
+      image: "./images/Unity_Small_Finnace_Bank_e7d2ec53d7.avif",
+    },
+    {
+      name: "MoneyView",
+      link: "https://moneyview.in/personal-loan?utm_source=bl&utm_medium=digiloans&utm_campaign=dsa",
+      image: "./images/moneyview.svg",
+    },
+    {
+      name: "InCred",
+      link: "https://www.incred.com/personal-loan/?partnerId=8313827854371024P&utm_source=DSA&utm_medium=digiloans&utm_campaign=Buddyloan",
+      image: "./images/increed.svg",
+    },
+    {
+      name: "Smartcoin (Olyv)",
+      link: "https://tinyurl.com/SMARCOIN2527",
+      image: "./images/Smart_Coin_847bcd1cc3.avif",
+    },
+    {
+      name: "Zype",
+      link: "https://zype.onelink.me/vx8a?af_xp=custom&pid=CustomerSource&af_dp=com.zype.mobile%3A%2F%2F&deep_link_value=myZype&af_click_lookback=30d&c=BuddyloanDSA_37",
+      image: "./images/Zype_1_bf0dfd1242.avif",
+    },
+    {
+      name: "IDFC First Bank",
+      link: "https://loan.indiasales.club?productCode=IDFC_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=478&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/IDFC_First_Bank_d21b7112b9.avif",
+    },
+    {
+      name: "Fi Money",
+      link: "https://loan.indiasales.club?productCode=FI_LOAN&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=368&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/FI_Money_Logo_f8579baa44.avif",
+    },
+    {
+      name: "IndusInd Bank",
+      link: "https://loan.indiasales.club?productCode=INDUS_LOAN&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=271&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/1694242872_IndusInd_re.svg",
+    },
+    {
+      name: "mPokket",
+      link: "https://loan.indiasales.club?productCode=MPOKKET&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=258&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/1694242888_mpockket_re.svg",
+    },
+    {
+      name: "Hero Fincorp",
+      link: "https://hipl.onelink.me/1OrE/qdf4ck6o",
+      image: "./images/herofinc.webp",
+    },
+    {
+      name: "Ram Fincorp",
+      link: "https://loan.indiasales.club?productCode=RAM_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=497&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/Ram_Fincorp_Logo_31f77c77e2.avif",
+    },
+    {
+      name: "Bharat Loan",
+      link: "https://loan.indiasales.club?productCode=BPL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=500&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/bharat.webp",
+    },
+    {
+      name: "Rupee 112",
+      link: "https://loan.indiasales.club?productCode=RUP_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=498&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/rupee112.webp",
+    },
+    {
+      name: "FIBE (Early Salary)",
+      link: "https://webportal.fibe.in/easy-loan?utm_source=BUDDYLOANPA&utm_medium=digiloans&campaignid=DSA",
+      image: "./images/fibe.webp",
+    },
+    {
+      name: "LNT", link: "COMING SOON"
+      ,image: "./images/lnt_finance_b74f4dee69.avif",
+     },
+    {
+      name: "PAYRUPIK",
+      link: "https://app.adjust.com/1sflo7sv?campaign={digiloans}&adgroup={buddy_loan01}&creative={BDL_dsa}&idfa={af_9}&click_id={click_id}&gps_adid={af_9}&android_id={af_6}&ip_address={af_5}&impression_id={af_7}&install_callback=https%3A%2F%2Futils.follow.whistle.mobi%2Fpixel.php%3Flinkid%3D{click_id}",
+      image: "./images/payrupik.webp",
+    },
+    {
+      name: "Aditya Birla Finance",
+      link: "https://abfl.finbox.in/?partnerCode=BS_LIICJW&agentCode=digiloans&productType=personal_loan",
+      image: "./images/Adity_Birla_Capital_Finance_dbcf07676a.avif",
+    },
+    {
+      name: "Bajaj Market",
+      link: "https://www.bajajfinservmarkets.in/apply-for-personal-loan-finservmarkets/?utm_source=B2B&utm_medium=E-referral&utm_campaign=Gaurav&utm_content=star_powerz_digital_technologies_private_limited",
+      image: "./images/Daco_4954654.png",
+    },
+    {
+      name: "Kissht",
+      link: "https://kissht.onelink.me/I5a1?af_xp=custom&pid=Buddyloan01&c=Buddyloan01&is_retargeting=true&af_reengagement_window=3d&af_sub1=digiloans&af_click_lookback=30d",
+      image: "./images/kissht.webp",
+    },
+  ],
+  business: [
+    {
+      name: "Flexiloans",
+      link: "https://loans.flexiloans.com/?nlp=1&partnerCode=64f1be98nfwae&utm_source=partner&utm_medium=buddyloan&utm_campaign=digiloans",
+      image: "./images/flexiloans-logo.png",
+    },
+    {
+      name: "Protium",
+      link: "https://dbl.protium.co.in/?utm_source=buddyloans&utm_medium=digital&utm_campaign=digiloans",
+      image: "./images/PROTIUM_86dac673b6.avif",
+    },
+    {
+      name: "Poonawalla Business Loan",
+      link: "https://business-loans.poonawallafincorp.com/?redirectto=primebl&utm_DSA_Code=PKA00192&UTM_Partner_Name=BVALUE_SERVICES_PRIVATE_LIMITED&UTM_Partner_ReferenceID=digiloans",
+      image: "./images/punewala.svg",
+    },
+    {
+      name: "ABFL Business Loan",
+      link: "COMING SOON",
+      image: "./images/Adity_Birla_Capital_Finance_dbcf07676a.avif",
+      
+     },
+  ],
+  emi: [
+    {
+      name: "Bajaj Insta EMI",
+      link: "https://www.bajajfinserv.in/webform/emicard/login?utm_source=expartner&utm_medium=DSA&utm_campaign=digiloans&clickid={click_id}",
+      image: "./images/Daco_4954654.png",
+    },
+    {
+      name: "IDFC Credit Card",
+      link: "https://www.idfcfirstbank.com/credit-card/ntb-diy/apply?utm_source=Partner&utm_medium=BANK_BDL&utm_campaign=digiloans",
+      image: "./images/IDFC_First_Bank_d21b7112b9.avif",
+    },
+    {
+      name: "SBI Credit Card",
+      link: "https://www.sbicard.com/sprint/c/simplyClick?ch=dis&GEMID1=dis_smart_SimplyClick_conversion_April25_eapply_Banner_static_digiloans&GEMID2=Buddyloan",
+      image: "./images/sbi.png",
+    },
+  ],
+};
+
+// Sample data for different loan types
+const sampleData = {
+  personal: [
+    {
+      amount: "₹ 5,00,000",
+      rate: "18%",
+      fee: "2% to 4% + GST",
+      tenure: "3 Years",
+      income: "20,000 & above",
+      age: "22 - 58 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 10,00,000",
+      rate: "15%",
+      fee: "1% to 3% + GST",
+      tenure: "5 Years",
+      income: "25,000 & above",
+      age: "21 - 60 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 2,00,000",
+      rate: "24%",
+      fee: "2% to 5% + GST",
+      tenure: "2 Years",
+      income: "15,000 & above",
+      age: "23 - 55 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 7,50,000",
+      rate: "16%",
+      fee: "1.5% to 3.5% + GST",
+      tenure: "4 Years",
+      income: "30,000 & above",
+      age: "25 - 65 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same;
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 3,00,000",
+      rate: "22%",
+      fee: "3% to 6% + GST",
+      tenure: "3 Years",
+      income: "18,000 & above",
+      age: "21 - 60 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+  ],
+  business: [
+    {
+      amount: "₹ 50,00,000",
+      rate: "12%",
+      fee: "1% to 2% + GST",
+      tenure: "5 Years",
+      turnover: "10 Lakhs & above",
+      age: "2+ years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 25,00,000",
+      rate: "14%",
+      fee: "1.5% to 3% + GST",
+      tenure: "3 Years",
+      turnover: "5 Lakhs & above",
+      age: "1+ years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000;
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      amount: "₹ 1,00,00,000",
+      rate: "11%",
+      fee: "0.5% to 1.5% + GST",
+      tenure: "7 Years",
+      turnover: "50 Lakhs & above",
+      age: "3+ years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+  ],
+  emi: [
+    {
+      limit: "₹ 3,00,000",
+      rate: "13%",
+      fee: "Nil",
+      validity: "Lifetime",
+      income: "25,000 & above",
+      age: "21 - 65 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      limit: "₹ 5,00,000",
+      rate: "11%",
+      fee: "₹ 999",
+      validity: "Lifetime",
+      income: "30,000 & above",
+      age: "21 - 60 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+    {
+      limit: "₹ 2,00,000",
+      rate: "15%",
+      fee: "₹ 500",
+      validity: "Lifetime",
+      income: "20,000 & above",
+      age: "21 - 70 years",
+      policies: `Payout T&C
+1. The payout will be applicable only if the customer successfully disburses the loan through the partner's platform.
+2. In case the customer gets rejected and is redirected to the Personal Loan journey, the payout will not be applicable for that lead.
+
+Other T&C
+1. Customer must have an HDFC Bank Credit Card.
+2. No past delay in Credit Card payments.
+3. No ongoing loan or EMI on the Credit Card.
+4. Loan amount should be more than or equal to ₹25,000.
+5. PAN and Aadhaar should be available.
+6. Date of Birth on PAN and Aadhaar should match.
+7. User must apply from their own device and mobile number.
+8. No loan/credit defaults or write-offs should be there.
+9. No delays in other loan/credit payments.
+10. Address should be complete, with no short forms, and include proper landmarks.
+11. The name on all documents should be the same.
+12. Payout will be received only after successful credit line disbursement.
+13. Loan application process should be completed in a single journey.
+14. The partner should not accept any payment or give any incentive to the customer for availing the loan through this platform.
+15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
+    },
+  ],
+};
+
+function getRandomData(type, index) {
+  const dataArray = sampleData[type];
+  return dataArray[index % dataArray.length];
+}
+
+function createLoanCard(vendor, index, type) {
+  const data = getRandomData(type, index);
+  const isComingSoon = vendor.link === "COMING SOON" || !vendor.link;
+  const cardId = `${type}-${index}`;
+
+  return `
+                <div class="loan-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center">
+                          <img src="${vendor.image}" alt="${ vendor.name
+                          }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:cover;object-fit:contain;border-radius:8px;">
+</div>
+                        
+                        <button class="btn apply-btn ${
+                          isComingSoon ? "disabled" : ""
+                        }" 
+                                onclick="${
+                                  isComingSoon
+                                    ? ""
+                                    : `window.open('${vendor.link}', '_blank')`
+                                }"
+                                ${isComingSoon ? "disabled" : ""}>
+                            ${isComingSoon ? "Coming Soon" : "Apply Now"}
+                        </button>
+                    </div>
+
+                    <div class="row loan-details mb-4">
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="detail-label">${
+                              type === "business"
+                                ? "Loan Amount:"
+                                : type === "emi"
+                                ? "Credit Limit:"
+                                : "Loan Amount:"
+                            }</div>
+                            <div class="detail-value">upto ${
+                              type === "emi" ? data.limit : data.amount
+                            }</div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="detail-label">Interest Rate:</div>
+                            <div class="detail-value">Starting from ${
+                              data.rate
+                            }</div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="detail-label">Processing Fee:</div>
+                            <div class="detail-value">${data.fee}</div>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <div class="detail-label">${
+                              type === "emi" ? "Validity:" : "Tenure:"
+                            }</div>
+                            <div class="detail-value">${
+                              type === "emi" ? data.validity : data.tenure
+                            }</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="eligibility-text mb-0">
+                            View your loan eligibility quickly—just a few simple fields required!
+                        </p>
+                        <a class="details-toggle" data-bs-toggle="collapse" href="#collapse-${cardId}" role="button">
+                            Detailed Offers <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+
+                    <div class="collapse" id="collapse-${cardId}">
+                        <div class="collapse-content p-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Processing Fee:</span>
+                                        <span class="text-muted">${
+                                          data.fee
+                                        }</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Prepayment Charges:</span>
+                                        <span class="text-success">Nil</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">${
+                                          type === "business"
+                                            ? "Business Age:"
+                                            : "Age:"
+                                        }</span>
+                                        <span class="text-muted">${
+                                          type === "business"
+                                            ? data.age
+                                            : data.age
+                                        }</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">${
+                                          type === "business"
+                                            ? "Min Turnover:"
+                                            : "Min Income:"
+                                        }</span>
+                                        <span class="text-muted">${
+                                          type === "business"
+                                            ? data.turnover
+                                            : data.income
+                                        }</span>
+                                    </div>
+                                </div>
+                            </div>
+                            ${
+                              data.policies
+                                ? `<div class="policies mt-3 pt-2 border-top">
+                                      <h6 class="fw-bold mb-2">Policies:</h6>
+                                      <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${data.policies}</pre>
+                                   </div>`
+                                : ""
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+}
+
+function renderLoanCards(type, containerId) {
+  const container = document.getElementById(containerId);
+  const vendors = loanData[type];
+  container.innerHTML = vendors
+    .map((vendor, index) => createLoanCard(vendor, index, type))
+    .join("");
+}
+
+// Initialize all loan cards
+document.addEventListener("DOMContentLoaded", function () {
+  renderLoanCards("personal", "personalLoansContainer");
+  renderLoanCards("business", "businessLoansContainer");
+  renderLoanCards("emi", "emiCardsContainer");
+
+  // Add event listeners for collapse toggles
+  document.addEventListener("shown.bs.collapse", function (e) {
+    const toggle = document.querySelector(`[href="#${e.target.id}"]`);
+    toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-up"></i>';
+  });
+
+  document.addEventListener("hidden.bs.collapse", function (e) {
+    const toggle = document.querySelector(`[href="#${e.target.id}"]`);
+    toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-down"></i>';
+  });
+});
