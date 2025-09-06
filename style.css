@@ -144,12 +144,14 @@ body {
             justify-content: center;
         }
 
-        .dl-typed-text {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+     .dl-typed-text {
+  font-size: 3.5rem;
+  font-weight: 700;
+
+  color: transparent;                  /* remove fill */
+  -webkit-text-stroke: 2px #ffffff;    /* outline thickness + color */
+}
+
 
         .dl-typing-cursor {
             display: inline-block;
