@@ -853,24 +853,13 @@ Other T&C
       income: "25,000 & above",
       age: "21 - 65 years",
       policies: `
-   Target Customers
+      1. Customers should have a valid Aadhaar number and PAN card.
 
-   Credit score above 750 and no negative credit remarks
-   Annual income: ₹3 Lakhs and above
-   Age: 21–60 years
+      2. Customers should use the same number that is linked to their Aadhaar while processing the application.
 
-Valid PAN & Aadhaar card
-Card available only for selected pincodes
+     3. The customer’s address should be from eligible PIN Codes.
 
-Other T&Cs
-
-- Customers must have Aadhaar and PAN card
-- Aadhaar should be linked to the customer’s mobile number
-- Payout will be made only after card approval and dispatch
-- Proof of residence required if Aadhaar address is outdated
-- Minimum age: 21 years; Maximum age: 60 years or retirement age
-- Minimum monthly income: ₹25,000
-- Card must be activated via first transaction within 30 days or penalty applies.`,
+    4. You will get your payout only after the card is activated by the customer.`,
     },
     {
       limit: "₹ 3,00,000",
@@ -880,24 +869,37 @@ Other T&Cs
       income: "25,000 & above",
       age: "21 - 65 years",
       policies: `
-   Target Customers
+   DOs:
 
-   Credit score above 750 and no negative credit remarks
-   Annual income: ₹3 Lakhs and above
-   Age: 21–60 years
+1. Encourage application via digital channels only.
 
-Valid PAN & Aadhaar card
-Card available only for selected pincodes
+2. Inform customers about reward structure and redemption platform.
 
-Other T&Cs
+3. Highlight spend threshold for lounge access clearly.
 
-- Customers must have Aadhaar and PAN card
-- Aadhaar should be linked to the customer’s mobile number
-- Payout will be made only after card approval and dispatch
-- Proof of residence required if Aadhaar address is outdated
-- Minimum age: 21 years; Maximum age: 60 years or retirement age
-- Minimum monthly income: ₹25,000
-- Card must be activated via first transaction within 30 days or penalty applies.`,
+4. Advise customers to use the app for payments and redemptions.
+
+
+
+DON’Ts:
+
+1. Don’t oversell benefits beyond actual thresholds (e.g., lounge access, travel spend).
+
+2. Don’t suggest rewards can be redeemed outside the Scapia app.
+
+3. Don’t use trademarks or branding without approval.
+
+
+
+Additional Terms:
+
+1. Customers must have valid Aadhaar and PAN.
+
+2. The mobile number used must be the same one linked to Aadhaar.
+
+3. Customer’s address must be within eligible PIN codes.
+
+4. Full Payouts to you will be made only after the card is activated by the customer.`,
     },
     {
       limit: "₹ 3,00,000",
@@ -907,24 +909,65 @@ Other T&Cs
       income: "25,000 & above",
       age: "21 - 65 years",
       policies: `
-   Target Customers
+  Target Customers
 
-   Credit score above 750 and no negative credit remarks
-   Annual income: ₹3 Lakhs and above
-   Age: 21–60 years
+Credit score above 750 and no negative credit remarks
+
+Annual income: ₹3 Lakhs and above
+
+Age: 21–60 years
 
 Valid PAN & Aadhaar card
+
 Card available only for selected pincodes
+
+
 
 Other T&Cs
 
 - Customers must have Aadhaar and PAN card
+
 - Aadhaar should be linked to the customer’s mobile number
+
 - Payout will be made only after card approval and dispatch
+
 - Proof of residence required if Aadhaar address is outdated
+
 - Minimum age: 21 years; Maximum age: 60 years or retirement age
+
 - Minimum monthly income: ₹25,000
-- Card must be activated via first transaction within 30 days or penalty applies.`,
+
+- Card must be activated via first transaction within 30 days or penalty applies`,
+    },
+    {
+      limit: "₹ 3,00,000",
+      rate: "13%",
+      fee: "Nil",
+      validity: "Lifetime",
+      income: "25,000 & above",
+      age: "21 - 65 years",
+      policies: `
+  1. Both salaried individuals and self employed individuals are eligible for the AU Small Finance bank Credit Card.
+
+2. Customers who are working as Daily wagers / Labours & Contractors / Lower profile blue collared job are not eligible for this card.
+
+3. Customer’s net yearly income should be above Rs. 3,00,000.
+
+4. Customer’s current residence and office address should be from mentioned list of pincodes.
+
+5. Customer should have a valid PAN and Aadhaar Card.
+
+6. Customers should have a good credit score.
+
+7. Customers with good track record in CIBIL are preferred
+
+8. Based on the customer’s eligibility and selected card type, may be required to upload additional documents, like - Last three month’s Bank account statement, Income tax return statement and latest credit card statement.
+
+9. Existing customers of AU Small Finance Bank are not eligible.
+
+10. Your customer should complete the whole application process in one attempt without clicking back button. They need to complete video KYC within 72 hours of application.
+
+11. Your customer should activate the credit card by making their 1st transaction within 30 days. If the card is not activated or canceled by the customer, a penalty will be charged.`,
     },
   ],
 };
