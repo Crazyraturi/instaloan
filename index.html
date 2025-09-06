@@ -671,5 +671,37 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="#home" id="backToTopBtn" class="back-to-top-btn" title="Go to top">
   <i class="fas fa-arrow-up"></i>
 </a>
+
+<style>
+#customerCarousel .carousel-control-prev,
+#customerCarousel .carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: auto;
+  width: 48px;
+  height: 48px;
+  background: rgba(33,150,243,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+#customerCarousel .carousel-control-prev {
+  left: -24px; /* Adjust as needed */
+}
+
+#customerCarousel .carousel-control-next {
+  right: -24px; /* Adjust as needed */
+}
+
+#customerCarousel .carousel-control-prev-icon,
+#customerCarousel .carousel-control-next-icon {
+  background-size: 60% 60%;
+  width: 32px;
+  height: 32px;
+}
+</style>
   </body>
 </html>
