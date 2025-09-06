@@ -797,14 +797,14 @@ function createLoanCard(vendor, index, type) {
                         <button class="btn apply-btn ${
                           isComingSoon ? "disabled" : ""
                         }" 
-                                onclick="${
-                                  isComingSoon
-                                    ? ""
-                                    : `window.open('${vendor.link}', '_blank')`
-                                }"
-                                ${isComingSoon ? "disabled" : ""}>
-                            ${isComingSoon ? "Coming Soon" : "Apply Now"}
-                        </button>
+  onclick="${
+    isComingSoon
+      ? ""
+      : `openLoanModal('${vendor.name.replace(/'/g, "\\'")}', '${getRandomData(type, index).rate.replace(/'/g, "\\'")}')`
+  }"
+  ${isComingSoon ? "disabled" : ""}>
+  ${isComingSoon ? "Coming Soon" : "Apply Now"}
+</button>
                     </div>
 
                     <div class="row loan-details mb-4">
