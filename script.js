@@ -7,9 +7,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-
-
-
 // ================= Loan Calculator =================
 function formatCurrency(amount) {
   return "₹" + amount.toLocaleString("en-IN");
@@ -118,11 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCalculations();
 
-  // Apply button
-  document.querySelector(".apply-button")?.addEventListener("click", () => {
-    alert("Redirecting to loan application form...");
-  });
-
   // Modal close listeners
   window.addEventListener("click", (e) => {
     const modal = document.getElementById("loanModal");
@@ -163,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Testimonials
   initializeTestimonials();
-
 
   // Show/hide back to top button on scroll
   window.addEventListener("scroll", function () {
@@ -418,9 +409,10 @@ const loanData = {
       image: "./images/fibe.webp",
     },
     {
-      name: "LNT", link: "COMING SOON"
-      ,image: "./images/lnt_finance_b74f4dee69.avif",
-     },
+      name: "LNT",
+      link: "COMING SOON",
+      image: "./images/lnt_finance_b74f4dee69.avif",
+    },
     {
       name: "PAYRUPIK",
       link: "https://app.adjust.com/1sflo7sv?campaign={digiloans}&adgroup={buddy_loan01}&creative={BDL_dsa}&idfa={af_9}&click_id={click_id}&gps_adid={af_9}&android_id={af_6}&ip_address={af_5}&impression_id={af_7}&install_callback=https%3A%2F%2Futils.follow.whistle.mobi%2Fpixel.php%3Flinkid%3D{click_id}",
@@ -462,8 +454,7 @@ const loanData = {
       name: "ABFL Business Loan",
       link: "COMING SOON",
       image: "./images/Adity_Birla_Capital_Finance_dbcf07676a.avif",
-      
-     },
+    },
   ],
   emi: [
     {
@@ -480,6 +471,49 @@ const loanData = {
       name: "SBI Credit Card",
       link: "https://www.sbicard.com/sprint/c/simplyClick?ch=dis&GEMID1=dis_smart_SimplyClick_conversion_April25_eapply_Banner_static_digiloans&GEMID2=Buddyloan",
       image: "./images/sbi.png",
+    },
+  ],
+  credit: [
+    {
+      name: "BOBCARD Uni GoldX Credit Card",
+      image: "./images/1746093573_1737534219_logo_uni_dbc4c88973+(2).webp",
+    },
+    {
+      name: "Scapia Federal Bank Credit Card",
+      image:
+        "./images/1754650132_6793e2d597822ee8ea04b166_6788074f8d3d013d2d8bbbcb_6549e2ce3c0f09f5a403dfd0_scapia.webp",
+    },
+    {
+      name: "IndusInd Bank Tiger Credit Card",
+      image: "./images/1694242872_IndusInd_re.svg",
+    },
+    {
+      name: "AU Small Finance Bank Credit Card",
+      image: "./images/ausmall.webp",
+    },
+    {
+      name: "ICICI Credit Card",
+      image: "./images/icici.webp",
+    },
+    {
+      name: "IndianOil RBL Bank XTRA Credit_Card",
+      image: "./images/1749719799_1746799220_1746712698_1742476891_RBL.webp",
+    },
+    {
+      name: "YES Bank POP-CLUB Credit Card",
+      image: "./images/sbi.webp",
+    },
+    {
+      name: "KIWI Rupay Credit Card",
+      image: "./images/kiwi.webp",
+    },
+    {
+      name: "Tata Neu HDFC Bank Credit_Card",
+      image: "./images/tatneu.webp",
+    },
+    {
+      name: "Axis Life Time Free Card",
+      image: "./images/axisbank.webp",
     },
   ],
 };
@@ -800,6 +834,89 @@ Other T&C
 15. The partner is expected not to make false promises or provide wrong and misleading information to the customer.`,
     },
   ],
+  credit: [
+    {
+      limit: "₹ 3,00,000",
+      rate: "13%",
+      fee: "Nil",
+      validity: "Lifetime",
+      income: "25,000 & above",
+      age: "21 - 65 years",
+      policies: `
+   Target Customers
+
+   Credit score above 750 and no negative credit remarks
+   Annual income: ₹3 Lakhs and above
+   Age: 21–60 years
+
+Valid PAN & Aadhaar card
+Card available only for selected pincodes
+
+Other T&Cs
+
+- Customers must have Aadhaar and PAN card
+- Aadhaar should be linked to the customer’s mobile number
+- Payout will be made only after card approval and dispatch
+- Proof of residence required if Aadhaar address is outdated
+- Minimum age: 21 years; Maximum age: 60 years or retirement age
+- Minimum monthly income: ₹25,000
+- Card must be activated via first transaction within 30 days or penalty applies.`,
+    },
+    {
+      limit: "₹ 3,00,000",
+      rate: "13%",
+      fee: "Nil",
+      validity: "Lifetime",
+      income: "25,000 & above",
+      age: "21 - 65 years",
+      policies: `
+   Target Customers
+
+   Credit score above 750 and no negative credit remarks
+   Annual income: ₹3 Lakhs and above
+   Age: 21–60 years
+
+Valid PAN & Aadhaar card
+Card available only for selected pincodes
+
+Other T&Cs
+
+- Customers must have Aadhaar and PAN card
+- Aadhaar should be linked to the customer’s mobile number
+- Payout will be made only after card approval and dispatch
+- Proof of residence required if Aadhaar address is outdated
+- Minimum age: 21 years; Maximum age: 60 years or retirement age
+- Minimum monthly income: ₹25,000
+- Card must be activated via first transaction within 30 days or penalty applies.`,
+    },
+    {
+      limit: "₹ 3,00,000",
+      rate: "13%",
+      fee: "Nil",
+      validity: "Lifetime",
+      income: "25,000 & above",
+      age: "21 - 65 years",
+      policies: `
+   Target Customers
+
+   Credit score above 750 and no negative credit remarks
+   Annual income: ₹3 Lakhs and above
+   Age: 21–60 years
+
+Valid PAN & Aadhaar card
+Card available only for selected pincodes
+
+Other T&Cs
+
+- Customers must have Aadhaar and PAN card
+- Aadhaar should be linked to the customer’s mobile number
+- Payout will be made only after card approval and dispatch
+- Proof of residence required if Aadhaar address is outdated
+- Minimum age: 21 years; Maximum age: 60 years or retirement age
+- Minimum monthly income: ₹25,000
+- Card must be activated via first transaction within 30 days or penalty applies.`,
+    },
+  ],
 };
 
 function getRandomData(type, index) {
@@ -816,8 +933,9 @@ function createLoanCard(vendor, index, type) {
                 <div class="loan-card p-4">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="d-flex align-items-center">
-                          <img src="${vendor.image}" alt="${ vendor.name
-                          }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:cover;object-fit:contain;border-radius:8px;">
+                          <img src="${vendor.image}" alt="${
+    vendor.name
+  }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:cover;object-fit:contain;border-radius:8px;">
 </div>
                         
                         <button class="btn apply-btn ${
@@ -826,7 +944,10 @@ function createLoanCard(vendor, index, type) {
   onclick="${
     isComingSoon
       ? ""
-      : `openLoanModal('${vendor.name.replace(/'/g, "\\'")}', '${getRandomData(type, index).rate.replace(/'/g, "\\'")}')`
+      : `openLoanModal('${vendor.name.replace(/'/g, "\\'")}', '${getRandomData(
+          type,
+          index
+        ).rate.replace(/'/g, "\\'")}')`
   }"
   ${isComingSoon ? "disabled" : ""}>
   ${isComingSoon ? "Coming Soon" : "Apply Now"}
@@ -944,6 +1065,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderLoanCards("personal", "personalLoansContainer");
   renderLoanCards("business", "businessLoansContainer");
   renderLoanCards("emi", "emiCardsContainer");
+  renderLoanCards("credit", "creditCardsContainer");
 
   // Add event listeners for collapse toggles
   document.addEventListener("shown.bs.collapse", function (e) {
@@ -961,148 +1083,257 @@ let currentIndex = 0;
 const cardsPerPage = 7;
 
 function renderPersonalLoanCards() {
-  const container = document.getElementById('personalLoansContainer');
-  container.innerHTML = '';
+  const container = document.getElementById("personalLoansContainer");
+  container.innerHTML = "";
   const vendors = loanData.personal;
   const end = Math.min(currentIndex + cardsPerPage, vendors.length);
   for (let i = 0; i < end; i++) {
     container.innerHTML += createLoanCard(vendors[i], i, "personal");
   }
   // Show/hide View More button
-  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  const viewMoreBtn = document.getElementById("viewMoreBtn");
   if (end < vendors.length) {
-    viewMoreBtn.style.display = 'block';
+    viewMoreBtn.style.display = "block";
   } else {
-    viewMoreBtn.style.display = 'none';
+    viewMoreBtn.style.display = "none";
   }
 }
 
-document.getElementById('viewMoreBtn').addEventListener('click', function() {
+document.getElementById("viewMoreBtn").addEventListener("click", function () {
   currentIndex += cardsPerPage;
   renderPersonalLoanCards();
 });
 
 // Initial render
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   currentIndex = 0;
   renderPersonalLoanCards();
 });
 
 // ================= Loan Modal =================
 function openLoanModal(vendorName, interestRate) {
-  document.getElementById('loanModal').style.display = 'block';
-  document.getElementById('modalVendorName').textContent = vendorName;
-  document.getElementById('modalInterestRate').textContent = interestRate;
+  document.getElementById("loanModal").style.display = "block";
+  document.getElementById("modalVendorName").textContent = vendorName;
+  document.getElementById("modalInterestRate").textContent = interestRate;
 }
 
 function closeLoanModal() {
-  document.getElementById('loanModal').style.display = 'none';
+  document.getElementById("loanModal").style.display = "none";
 }
 
 // Close modal when clicking outside content
-window.addEventListener('click', function(e) {
-  const modal = document.getElementById('loanModal');
+window.addEventListener("click", function (e) {
+  const modal = document.getElementById("loanModal");
   if (e.target === modal) {
     closeLoanModal();
   }
 });
 
 // Handle form submission
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('loanApplicationForm');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("loanApplicationForm");
   if (form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      alert('Application submitted! Thank you.');
+      alert("Application submitted! Thank you.");
       closeLoanModal();
       form.reset();
     });
   }
 });
 
-  function animateCounter(element, target, suffix = "") {
-    const duration = 2000; // 2 seconds
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    let step = 0;
+function animateCounter(element, target, suffix = "") {
+  const duration = 2000; // 2 seconds
+  const steps = 60;
+  const increment = target / steps;
+  let current = 0;
+  let step = 0;
 
-    const timer = setInterval(() => {
-      step++;
-      current = Math.min(increment * step, target);
+  const timer = setInterval(() => {
+    step++;
+    current = Math.min(increment * step, target);
 
+    if (target >= 1000) {
+      // Format large numbers with commas
+      element.textContent = Math.floor(current).toLocaleString() + suffix;
+    } else {
+      element.textContent = Math.floor(current) + suffix;
+    }
+
+    if (step >= steps) {
+      clearInterval(timer);
+      // Ensure final value is exact
       if (target >= 1000) {
-        // Format large numbers with commas
-        element.textContent = Math.floor(current).toLocaleString() + suffix;
+        element.textContent = target.toLocaleString() + suffix;
       } else {
-        element.textContent = Math.floor(current) + suffix;
+        element.textContent = target + suffix;
       }
+    }
+  }, duration / steps);
+}
 
-      if (step >= steps) {
-        clearInterval(timer);
-        // Ensure final value is exact
-        if (target >= 1000) {
-          element.textContent = target.toLocaleString() + suffix;
-        } else {
-          element.textContent = target + suffix;
-        }
-      }
-    }, duration / steps);
+// Intersection Observer for triggering animations when in view
+const observerOptions = {
+  threshold: 0.3,
+  rootMargin: "0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const statItems = entry.target.querySelectorAll(".stat-item");
+
+      statItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("animated");
+
+          const numberElement = item.querySelector(".stat-number");
+          const target = parseInt(numberElement.dataset.target);
+          const suffix = numberElement.dataset.suffix || "";
+
+          animateCounter(numberElement, target, suffix);
+        }, index * 200); // Stagger the animations
+      });
+
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Start observing when page loads
+document.addEventListener("DOMContentLoaded", () => {
+  const statsContainer = document.querySelector(".stats-container");
+  observer.observe(statsContainer);
+});
+
+// Add click event to Know More button
+document.querySelector(".know-more-btn").addEventListener("click", () => {
+  alert(
+    "Know More button clicked! You can add your custom functionality here."
+  );
+});
+
+// Add hover effects for additional interactivity
+document.querySelectorAll(".stat-item").forEach((item) => {
+  item.addEventListener("mouseenter", () => {
+    const number = item.querySelector(".stat-number");
+    number.style.transform = "scale(1.05)";
+    number.style.transition = "transform 0.3s ease";
+  });
+
+  item.addEventListener("mouseleave", () => {
+    const number = item.querySelector(".stat-number");
+    number.style.transform = "scale(1)";
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const calcApplyBtn = document.getElementById("calculatorApplyBtn");
+  if (calcApplyBtn) {
+    calcApplyBtn.addEventListener("click", function () {
+      openContactModal();
+    });
   }
-
-  // Intersection Observer for triggering animations when in view
-  const observerOptions = {
-    threshold: 0.3,
-    rootMargin: "0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const statItems = entry.target.querySelectorAll(".stat-item");
-
-        statItems.forEach((item, index) => {
-          setTimeout(() => {
-            item.classList.add("animated");
-
-            const numberElement = item.querySelector(".stat-number");
-            const target = parseInt(numberElement.dataset.target);
-            const suffix = numberElement.dataset.suffix || "";
-
-            animateCounter(numberElement, target, suffix);
-          }, index * 200); // Stagger the animations
-        });
-
-        observer.unobserve(entry.target);
+});
+function createCreditCardCard(card, index) {
+  return `
+    <div class="loan-card p-4">
+      <div class="d-flex align-items-center mb-3">
+        <img src="${loanData.credit[index].image}" alt="${card.name}" class="vendor-logo me-3" style="width:120px;height:40px;object-fit:contain;border-radius:8px;">
+        <h5 class="mb-0 fw-bold">${card.name}</h5>
+      </div>
+      <div class="row loan-details mb-3">
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Credit Limit:</div>
+          <div class="detail-value">${card.limit || "—"}</div>
+        </div>
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Interest Rate:</div>
+          <div class="detail-value">${card.rate || "—"}</div>
+        </div>
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Fee:</div>
+          <div class="detail-value">${card.fee || "—"}</div>
+        </div>
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Validity:</div>
+          <div class="detail-value">${card.validity || "—"}</div>
+        </div>
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Income:</div>
+          <div class="detail-value">${card.income || "—"}</div>
+        </div>
+        <div class="col-6 col-md-4 mb-2">
+          <div class="detail-label">Age:</div>
+          <div class="detail-value">${card.age || "—"}</div>
+        </div>
+      </div>
+      ${
+        card.policies
+          ? `<div class="policies mt-3 pt-2 border-top">
+                <h6 class="fw-bold mb-2">Policies:</h6>
+                <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${card.policies}</pre>
+             </div>`
+          : ""
       }
-    });
-  }, observerOptions);
+    </div>
+  `;
+}
 
-  // Start observing when page loads
-  document.addEventListener("DOMContentLoaded", () => {
-    const statsContainer = document.querySelector(".stats-container");
-    observer.observe(statsContainer);
-  });
+function renderCreditCards() {
+  const container = document.getElementById("creditCardsContainer");
+  if (!container) return;
+  // Use the length of loanData.credit (which has images and names)
+  container.innerHTML = loanData.credit
+    .map((vendor, idx) => {
+      const card = sampleData.credit[idx] || {};
+      return `
+        <div class="loan-card p-4 mb-4">
+          <div class="d-flex align-items-center mb-3">
+            <img src="${vendor.image}" alt="${vendor.name}" class="vendor-logo me-3" style="width:120px;height:40px;object-fit:contain;border-radius:8px;">
+            <h5 class="mb-0 fw-bold">${vendor.name}</h5>
+          </div>
+          <div class="row loan-details mb-3">
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Credit Limit:</div>
+              <div class="detail-value">${card.limit || "—"}</div>
+            </div>
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Interest Rate:</div>
+              <div class="detail-value">${card.rate || "—"}</div>
+            </div>
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Fee:</div>
+              <div class="detail-value">${card.fee || "—"}</div>
+            </div>
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Validity:</div>
+              <div class="detail-value">${card.validity || "—"}</div>
+            </div>
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Income:</div>
+              <div class="detail-value">${card.income || "—"}</div>
+            </div>
+            <div class="col-6 col-md-4 mb-2">
+              <div class="detail-label">Age:</div>
+              <div class="detail-value">${card.age || "—"}</div>
+            </div>
+          </div>
+          ${
+            card.policies
+              ? `<div class="policies mt-3 pt-2 border-top">
+                    <h6 class="fw-bold mb-2">Policies:</h6>
+                    <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${card.policies}</pre>
+                 </div>`
+              : ""
+          }
+        </div>
+      `;
+    })
+    .join("");
+}
 
-  // Add click event to Know More button
-  document.querySelector(".know-more-btn").addEventListener("click", () => {
-    alert(
-      "Know More button clicked! You can add your custom functionality here."
-    );
-  });
-
-  // Add hover effects for additional interactivity
-  document.querySelectorAll(".stat-item").forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-      const number = item.querySelector(".stat-number");
-      number.style.transform = "scale(1.05)";
-      number.style.transition = "transform 0.3s ease";
-    });
-
-    item.addEventListener("mouseleave", () => {
-      const number = item.querySelector(".stat-number");
-      number.style.transform = "scale(1)";
-    });
-  });
-
-
+// Render credit cards on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  renderCreditCards();
+});
