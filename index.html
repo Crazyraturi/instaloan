@@ -59,16 +59,28 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero px-5">
-      <div>
-        <h1 >Instant Loan upto 5  Lakh <br> in 5 minues from <br> <span class="section-title">Poonawalla , Fincorp etc.</span> </h1>
-        <button class="hero-button  fs-4 mt-3 ">Apply Now</button>
-      </div>
-      <div>
-        <img src="./images/20250905_1647_Background Removed Image_remix_01k4csd5s6fc1rzwzv9trdxvsr.png" class="hero-img" alt="">
-      </div>
-     
+     <section class="dl-hero-sections">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="dl-hero-content">
+                        <h1 class="dl-main-title">
+                            Find the perfect<br>
+                            Financial Solutions for<br>
+                            Your
+                        </h1>
+                        <div class="dl-typing-container">
+                            <span class="dl-typed-text" id="dlTypedText"></span>
+                            <span class="dl-typing-cursor"></span>
+                        </div>
+                        <button class="btn dl-btn-applys">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    
+
 
     <!-- why partener with us section -->
     <section class="dl-hero-section " id="about">
@@ -155,7 +167,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+      </div>
 
    
     
@@ -652,38 +664,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
 
-<script>
-function openLoanModal(vendorName, interestRate) {
-  document.getElementById('modalVendorName').innerText = vendorName;
-  document.getElementById('modalInterestRate').innerText = interestRate ;
-  document.getElementById('loanModal').style.display = 'block';
-}
 
-function closeLoanModal() {
-  document.getElementById('loanModal').style.display = 'none';
-}
-
-// Optional: Close modal when clicking outside the modal content
-window.addEventListener('click', function(e) {
-  const modal = document.getElementById('loanModal');
-  if (e.target === modal) {
-    closeLoanModal();
-  }
-});
-
-// Handle loan application form submission
-document.addEventListener('DOMContentLoaded', function() {
-  const loanApplicationForm = document.getElementById('loanApplicationForm');
-  if (loanApplicationForm) {
-    loanApplicationForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Loan application submitted successfully!');
-      closeLoanModal();
-      loanApplicationForm.reset();
-    });
-  }
-});
-</script>
 
 <!-- Floating Back to Top Button -->
 <a href="#home" id="backToTopBtn" class="back-to-top-btn" title="Go to top">

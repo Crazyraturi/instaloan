@@ -164,8 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Testimonials
   initializeTestimonials();
 
-  // Typing effect
-  if (document.getElementById("typingText")) setTimeout(typeEffect, 1000);
 
   // Show/hide back to top button on scroll
   window.addEventListener("scroll", function () {
@@ -258,34 +256,62 @@ function initializeTestimonials() {
 }
 
 // ================= Typing Effect =================
-const words = ["Gold Loan", "Personal Loan", "Business Loan", "Home Loan"];
-let currentWordIndex = 0;
-let currentCharIndex = 0;
-let isDeleting = false;
+document.addEventListener("DOMContentLoaded", function () {
+  const dlTypingWords = [
+    "Gold Loan",
+    "Personal Loan",
+    "Home Loan",
+    "Business Loan",
+    "Car Loan",
+    "Education Loan",
+    "Insurance Needs",
+    "Investment Plans",
+    "Credit Cards",
+    "Quick Cash",
+  ];
 
-function typeEffect() {
-  const typingElement = document.getElementById("typingText");
-  if (!typingElement) return;
+  let dlCurrentWordIndex = 0;
+  let dlCurrentCharIndex = 0;
+  let dlIsDeleting = false;
+  const dlTypedElement = document.getElementById("dlTypedText");
 
-  const currentWord = words[currentWordIndex];
+  function dlTypeEffect() {
+    if (!dlTypedElement) return;
+    const dlCurrentWord = dlTypingWords[dlCurrentWordIndex];
 
-  typingElement.textContent = isDeleting
-    ? currentWord.substring(0, currentCharIndex--)
-    : currentWord.substring(0, currentCharIndex++);
+    if (!dlIsDeleting) {
+      dlTypedElement.textContent = dlCurrentWord.substring(
+        0,
+        dlCurrentCharIndex + 1
+      );
+      dlCurrentCharIndex++;
 
-  let speed = isDeleting ? 75 : 150;
+      if (dlCurrentCharIndex === dlCurrentWord.length) {
+        dlIsDeleting = true;
+        setTimeout(dlTypeEffect, 2000);
+        return;
+      }
+    } else {
+      dlTypedElement.textContent = dlCurrentWord.substring(
+        0,
+        dlCurrentCharIndex - 1
+      );
+      dlCurrentCharIndex--;
 
-  if (!isDeleting && currentCharIndex === currentWord.length) {
-    speed = 2000;
-    isDeleting = true;
-  } else if (isDeleting && currentCharIndex === 0) {
-    isDeleting = false;
-    currentWordIndex = (currentWordIndex + 1) % words.length;
-    speed = 500;
+      if (dlCurrentCharIndex === 0) {
+        dlIsDeleting = false;
+        dlCurrentWordIndex = (dlCurrentWordIndex + 1) % dlTypingWords.length;
+        setTimeout(dlTypeEffect, 500);
+        return;
+      }
+    }
+
+    const dlTypingSpeed = dlIsDeleting ? 100 : 150;
+    setTimeout(dlTypeEffect, dlTypingSpeed);
   }
 
-  setTimeout(typeEffect, speed);
-}
+  dlTypeEffect();
+});
 
 // ================= FAQ Toggle =================
 function toggleFaq(link) {
@@ -1078,3 +1104,5 @@ document.addEventListener('DOMContentLoaded', function() {
       number.style.transform = "scale(1)";
     });
   });
+
+

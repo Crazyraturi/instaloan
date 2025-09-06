@@ -109,99 +109,108 @@ body {
 }
 
 /* Hero Section */
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
-  padding: 2rem 5%;
-  min-height: 90vh;  /* full screen */
-  box-sizing: border-box;
 
-  /* 👇 light blue gradient background */
-  background: linear-gradient(135deg, #e6f7ff 0%, #cceeff 50%, #b3e0ff 100%);
-}
+       .dl-hero-sections {
+            height: 80vh;
+            background: linear-gradient(135deg, rgba(74, 108, 247, 0.85), rgba(174, 174, 255, 0.85)), 
+                        url('https://assets.smfgindiacredit.com/sites/default/files/PL-Can-Be-a-Smart-Choice-for-Millennials-Thumb.png?VersionId=MqRRfZzRPLyYZ2vNK4IpVgfzUUf8ScxH');
+            background-size: cover;
+            background-position: top;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
 
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 4rem); /* responsive text */
-  font-weight: 800;
-  line-height: 1.2;
-}
+      
+      
+        .dl-hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
 
-.hero-button {
-  
-  border: none;
-  padding: 14px 32px;
-  color: white;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
+        .dl-main-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
 
-.hero-button:hover {
-  background-color: #166daf;
-}
+        .dl-typing-container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.hero-img {
+        .dl-typed-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
 
-  max-height: 30vw;  /* image height = 80% of screen height */
-  width: auto;
-  border: 2px solid rgb(131, 217, 251);
-  border-radius: 30px;
-  background-color: white;
-  object-fit: contain;
-}
+        .dl-typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 60px;
+            background-color: #4a6cf7;
+            margin-left: 5px;
+            animation: dl-blink 1s infinite;
+        }
 
-.text-higlight {
-  color: #166daf;
-}
+        @keyframes dl-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
 
-/* Responsive Breakpoints */
-@media (max-width: 992px) {
-  .hero {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    /* 👇 light blue gradient background */
-  background: linear-gradient(135deg, #e6f7ff 0%, #cceeff 50%, #b3e0ff 100%);
-  }
+        .dl-btn-applys {
+           background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%) !important;
+            color: white!important;
+            border: none;
+            padding: 3rem 3.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(74, 108, 247, 0.3);
+           
+        }
 
-  .hero h1 {
-    font-size: clamp(1.8rem, 6vw, 3rem);
-  }
+        .dl-btn-applys:hover {
+            background: #3d5af1;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(74, 108, 247, 0.4);
+        }
 
-  .navbar-brand img {
-  height:100px;
-  width: 200px;
-  object-fit: cover;
-}
+        @media (max-width: 768px) {
+            .dl-main-title,
+            .dl-typed-text {
+                font-size: 2.5rem;
+            }
+            
+            .dl-typing-cursor {
+                height: 40px;
+            }
+            
+            .dl-hero-section {
+                background-attachment: scroll;
+            }
+        }
 
-  
-  
-}
-.hero-button {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);}
-
-@media (max-width: 576px) {
-  .hero h1 {
-    font-size: clamp(1.5rem, 7vw, 2rem);
-  }
-
-  .hero-button {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-
-  .hero-img {
-  width: 50vw;        /* 👈 bigger on large screens */
-  max-width: 650px;   /* allow larger but not too huge */
-  min-width: 300px;   /* keep readability */
-}
-}
-
+        @media (max-width: 576px) {
+            .dl-main-title,
+            .dl-typed-text {
+                font-size: 2rem;
+            }
+            
+            .dl-typing-cursor {
+                height: 32px;
+            }
+        }
 /* Footer */
 .footer {
   background: var(--text-dark);
