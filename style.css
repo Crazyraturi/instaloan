@@ -33,7 +33,6 @@ body {
 /* Navigation */
 .navbar {
   background: var(--white) !important;
-  padding: 1rem 0;
   box-shadow: 0 2px 15px rgba(33, 150, 243, 0.1);
   position: fixed;
   width: 100%;
@@ -45,7 +44,7 @@ body {
 
 .navbar-brand img {
   height:100px;
-  width: 300px;
+  width: 250px;
   object-fit: cover;
 }
 
