@@ -1436,13 +1436,13 @@ body {
 }
 
 .apply-btn {
-  background: #08085c;
+  background: #08085c!important;
   background: linear-gradient(
     213deg,
     rgba(8, 8, 92, 1) 0%,
     rgba(9, 9, 121, 1) 35%,
     rgba(0, 212, 255, 1) 100%
-  );
+  )!important;
   border: none;
   border-radius: 8px;
   color: #fff !important;
@@ -1602,7 +1602,6 @@ body {
 @media (max-width: 600px) {
   .dl-cta-button,
   .apply-btn {
-    display: block;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -1750,3 +1749,12 @@ body {
 .stat-item:hover::before {
   opacity: 1;
 }
+
+#creditCardsContainer .apply-btn {
+    background-color: #007bff !important;
+    color: white !important;
+    border: 1px solid #007bff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+} 

@@ -477,43 +477,53 @@ const loanData = {
     {
       name: "BOBCARD Uni GoldX Credit Card",
       image: "./images/1746093573_1737534219_logo_uni_dbc4c88973+(2).webp",
+      link: "available",
     },
     {
       name: "Scapia Federal Bank Credit Card",
       image:
         "./images/1754650132_6793e2d597822ee8ea04b166_6788074f8d3d013d2d8bbbcb_6549e2ce3c0f09f5a403dfd0_scapia.webp",
+      link: "available",
     },
     {
       name: "IndusInd Bank Tiger Credit Card",
       image: "./images/1694242872_IndusInd_re.svg",
+      link: "available",
     },
     {
       name: "AU Small Finance Bank Credit Card",
       image: "./images/ausmall.webp",
+      link: "available",
     },
     {
       name: "ICICI Credit Card",
       image: "./images/icici.webp",
+      link: "available",
     },
     {
       name: "IndianOil RBL Bank XTRA Credit_Card",
       image: "./images/1749719799_1746799220_1746712698_1742476891_RBL.webp",
+      link: "available",
     },
     {
       name: "YES Bank POP-CLUB Credit Card",
       image: "./images/sbi.webp",
+      link: "available",
     },
     {
       name: "KIWI Rupay Credit Card",
       image: "./images/kiwi.webp",
+      link: "available",
     },
     {
       name: "Tata Neu HDFC Bank Credit_Card",
       image: "./images/tatneu.webp",
+      link: "available",
     },
     {
       name: "Axis Life Time Free Card",
       image: "./images/axisbank.webp",
+      link: "available",
     },
   ],
 };
@@ -950,7 +960,7 @@ function createLoanCard(vendor, index, type) {
         ).rate.replace(/'/g, "\\'")}')`
   }"
   ${isComingSoon ? "disabled" : ""}>
-  ${isComingSoon ? "Coming Soon" : "Apply Now"}
+  ${isComingSoon ? "A pply Now" : "Apply Now"}
 </button>
                     </div>
 
@@ -1235,105 +1245,276 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-function createCreditCardCard(card, index) {
+function createLoanCard(vendor, index, type) {
+  const data = getRandomData(type, index);
+  const isComingSoon = vendor.link === "COMING SOON" || !vendor.link;
+  const cardId = `${type}-${index}`;
+
   return `
     <div class="loan-card p-4">
-      <div class="d-flex align-items-center mb-3">
-        <img src="${loanData.credit[index].image}" alt="${card.name}" class="vendor-logo me-3" style="width:120px;height:40px;object-fit:contain;border-radius:8px;">
-        <h5 class="mb-0 fw-bold">${card.name}</h5>
-      </div>
-      <div class="row loan-details mb-3">
-        <div class="col-6 col-md-4 mb-2">
-          <div class="detail-label">Credit Limit:</div>
-          <div class="detail-value">${card.limit || "—"}</div>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center">
+          <img src="${vendor.image}" alt="${
+    vendor.name
+  }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:cover;object-fit:contain;border-radius:8px;">
         </div>
-        <div class="col-6 col-md-4 mb-2">
+        
+        <button class="btn apply-btn ${isComingSoon ? "disabled" : ""}" 
+          onclick="${
+            isComingSoon
+              ? ""
+              : `openLoanModal('${vendor.name.replace(/'/g, "\\'")}', '${
+                  getRandomData(type, index).rate
+                    ? getRandomData(type, index).rate.replace(/'/g, "\\'")
+                    : "Variable Rate"
+                }')`
+          }"
+          ${isComingSoon ? "disabled" : ""}>
+          ${isComingSoon ? "Coming Soon" : "Apply Now"}
+        </button>
+      </div>
+
+      <div class="row loan-details mb-4">
+        <div class="col-6 col-md-3 mb-3">
+          <div class="detail-label">${
+            type === "business"
+              ? "Loan Amount:"
+              : type === "emi" || type === "credit"
+              ? "Credit Limit:"
+              : "Loan Amount:"
+          }</div>
+          <div class="detail-value">upto ${
+            type === "emi" || type === "credit"
+              ? data.limit || data.amount
+              : data.amount
+          }</div>
+        </div>
+        <div class="col-6 col-md-3 mb-3">
           <div class="detail-label">Interest Rate:</div>
-          <div class="detail-value">${card.rate || "—"}</div>
+          <div class="detail-value">Starting from ${data.rate}</div>
         </div>
-        <div class="col-6 col-md-4 mb-2">
-          <div class="detail-label">Fee:</div>
-          <div class="detail-value">${card.fee || "—"}</div>
+        <div class="col-6 col-md-3 mb-3">
+          <div class="detail-label">Processing Fee:</div>
+          <div class="detail-value">${data.fee}</div>
         </div>
-        <div class="col-6 col-md-4 mb-2">
-          <div class="detail-label">Validity:</div>
-          <div class="detail-value">${card.validity || "—"}</div>
-        </div>
-        <div class="col-6 col-md-4 mb-2">
-          <div class="detail-label">Income:</div>
-          <div class="detail-value">${card.income || "—"}</div>
-        </div>
-        <div class="col-6 col-md-4 mb-2">
-          <div class="detail-label">Age:</div>
-          <div class="detail-value">${card.age || "—"}</div>
+        <div class="col-6 col-md-3 mb-3">
+          <div class="detail-label">${
+            type === "emi" || type === "credit" ? "Validity:" : "Tenure:"
+          }</div>
+          <div class="detail-value">${
+            type === "emi" || type === "credit"
+              ? data.validity || data.tenure
+              : data.tenure
+          }</div>
         </div>
       </div>
-      ${
-        card.policies
-          ? `<div class="policies mt-3 pt-2 border-top">
-                <h6 class="fw-bold mb-2">Policies:</h6>
-                <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${card.policies}</pre>
-             </div>`
-          : ""
-      }
+
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="eligibility-text mb-0">
+          View your ${
+            type === "credit" ? "card" : "loan"
+          } eligibility quickly—just a few simple fields required!
+        </p>
+        <a class="details-toggle" data-bs-toggle="collapse" href="#collapse-${cardId}" role="button">
+          Detailed Offers <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+
+      <div class="collapse" id="collapse-${cardId}">
+        <div class="collapse-content p-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="fw-medium">Processing Fee:</span>
+                <span class="text-muted">${data.fee}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="fw-medium">${
+                  type === "credit" ? "Annual Charges:" : "Prepayment Charges:"
+                }</span>
+                <span class="text-success">Nil</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="fw-medium">${
+                  type === "business" ? "Business Age:" : "Age:"
+                }</span>
+                <span class="text-muted">${
+                  type === "business" ? data.age : data.age
+                }</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="fw-medium">${
+                  type === "business" ? "Min Turnover:" : "Min Income:"
+                }</span>
+                <span class="text-muted">${
+                  type === "business" ? data.turnover : data.income
+                }</span>
+              </div>
+            </div>
+          </div>
+          ${
+            data.policies
+              ? `<div class="policies mt-3 pt-2 border-top">
+                  <h6 class="fw-bold mb-2">Policies:</h6>
+                  <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${data.policies}</pre>
+                </div>`
+              : ""
+          }
+        </div>
+      </div>
     </div>
   `;
 }
 
+// Update your DOMContentLoaded event to render all sections consistently
+document.addEventListener("DOMContentLoaded", function () {
+  // Remove the separate renderCreditCards() call
+  // Use the unified renderLoanCards for all sections
+  renderLoanCards("personal", "personalLoansContainer");
+  renderLoanCards("business", "businessLoansContainer");
+  renderLoanCards("emi", "emiCardsContainer");
+  renderLoanCards("credit", "creditCardsContainer"); // Now uses the same modal system
+
+  // Add event listeners for collapse toggles
+  document.addEventListener("shown.bs.collapse", function (e) {
+    const toggle = document.querySelector(`[href="#${e.target.id}"]`);
+    if (toggle) {
+      toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-up"></i>';
+    }
+  });
+
+  document.addEventListener("hidden.bs.collapse", function (e) {
+    const toggle = document.querySelector(`[href="#${e.target.id}"]`);
+    if (toggle) {
+      toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-down"></i>';
+    }
+  });
+});
+
+// Make sure your loanData.credit entries have proper structure
+// Add this to ensure credit cards work with the modal
+const updatedCreditData = loanData.credit.map((card) => ({
+  ...card,
+  link: card.link || "available", // Set to "available" instead of undefined so isComingSoon will be false
+}));
+
+// Update the loanData.credit
+loanData.credit = updatedCreditData;
+
+
+// Replace the renderCreditCards function with this corrected version
 function renderCreditCards() {
   const container = document.getElementById("creditCardsContainer");
   if (!container) return;
-  // Use the length of loanData.credit (which has images and names)
+
   container.innerHTML = loanData.credit
     .map((vendor, idx) => {
       const card = sampleData.credit[idx] || {};
+      // Since credit cards don't have links, we'll make them available for application
+      const isComingSoon = false; // Changed this to false to show Apply Now buttons
+
       return `
         <div class="loan-card p-4 mb-4">
-          <div class="d-flex align-items-center mb-3">
-            <img src="${vendor.image}" alt="${vendor.name}" class="vendor-logo me-3" style="width:120px;height:40px;object-fit:contain;border-radius:8px;">
-            <h5 class="mb-0 fw-bold">${vendor.name}</h5>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex align-items-center">
+              <img src="${vendor.image}" alt="${vendor.name}" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:contain;border-radius:8px;">
+            </div>
+            
+            <button class="btn apply-btn ${isComingSoon ? 'disabled' : ''}" 
+              onclick="${isComingSoon ? '' : `openLoanModal('${vendor.name.replace(/'/g, "\\'")}', '${card.rate || 'Variable'}')`}"
+              ${isComingSoon ? 'disabled' : ''}>
+              ${isComingSoon ? 'Coming Soon' : 'Apply Now'}
+            </button>
           </div>
-          <div class="row loan-details mb-3">
-            <div class="col-6 col-md-4 mb-2">
+
+          <h5 class="mb-3 fw-bold">${vendor.name}</h5>
+
+          <div class="row loan-details mb-4">
+            <div class="col-6 col-md-3 mb-3">
               <div class="detail-label">Credit Limit:</div>
-              <div class="detail-value">${card.limit || "—"}</div>
+              <div class="detail-value">upto ${card.limit || '₹3,00,000'}</div>
             </div>
-            <div class="col-6 col-md-4 mb-2">
+            <div class="col-6 col-md-3 mb-3">
               <div class="detail-label">Interest Rate:</div>
-              <div class="detail-value">${card.rate || "—"}</div>
+              <div class="detail-value">Starting from ${card.rate || '13%'}</div>
             </div>
-            <div class="col-6 col-md-4 mb-2">
+            <div class="col-6 col-md-3 mb-3">
               <div class="detail-label">Fee:</div>
-              <div class="detail-value">${card.fee || "—"}</div>
+              <div class="detail-value">${card.fee || 'Nil'}</div>
             </div>
-            <div class="col-6 col-md-4 mb-2">
+            <div class="col-6 col-md-3 mb-3">
               <div class="detail-label">Validity:</div>
-              <div class="detail-value">${card.validity || "—"}</div>
-            </div>
-            <div class="col-6 col-md-4 mb-2">
-              <div class="detail-label">Income:</div>
-              <div class="detail-value">${card.income || "—"}</div>
-            </div>
-            <div class="col-6 col-md-4 mb-2">
-              <div class="detail-label">Age:</div>
-              <div class="detail-value">${card.age || "—"}</div>
+              <div class="detail-value">${card.validity || 'Lifetime'}</div>
             </div>
           </div>
-          ${
-            card.policies
-              ? `<div class="policies mt-3 pt-2 border-top">
-                    <h6 class="fw-bold mb-2">Policies:</h6>
-                    <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${card.policies}</pre>
-                 </div>`
-              : ""
-          }
+
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="eligibility-text mb-0">
+              View your card eligibility quickly—just a few simple fields required!
+            </p>
+            <a class="details-toggle" data-bs-toggle="collapse" href="#collapse-credit-${idx}" role="button">
+              Detailed Offers <i class="fas fa-chevron-down"></i>
+            </a>
+          </div>
+
+          <div class="collapse" id="collapse-credit-${idx}">
+            <div class="collapse-content p-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-medium">Processing Fee:</span>
+                    <span class="text-muted">${card.fee || 'Nil'}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-medium">Annual Charges:</span>
+                    <span class="text-success">Nil</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-medium">Age:</span>
+                    <span class="text-muted">${card.age || '21 - 65 years'}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-medium">Min Income:</span>
+                    <span class="text-muted">${card.income || '25,000 & above'}</span>
+                  </div>
+                </div>
+              </div>
+              ${card.policies ? `<div class="policies mt-3 pt-2 border-top">
+                <h6 class="fw-bold mb-2">Policies:</h6>
+                <pre style="white-space:pre-wrap;font-size:0.97rem;margin:0;">${card.policies}</pre>
+              </div>` : ''}
+            </div>
+          </div>
         </div>
       `;
     })
+    .join('');
+}
+
+// Alternative approach: Use the same createLoanCard function for consistency
+// You can also modify your existing code to use the createLoanCard function for credit cards:
+
+function renderLoanCards(type, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  const vendors = loanData[type];
+  if (!vendors) return;
+  
+  container.innerHTML = vendors
+    .map((vendor, index) => createLoanCard(vendor, index, type))
     .join("");
 }
 
-// Render credit cards on DOMContentLoaded
+// Then update your DOMContentLoaded event to include:
 document.addEventListener("DOMContentLoaded", function () {
-  renderCreditCards();
+  renderLoanCards("personal", "personalLoansContainer");
+  renderLoanCards("business", "businessLoansContainer");
+  renderLoanCards("emi", "emiCardsContainer");
+  renderLoanCards("credit", "creditCardsContainer"); // This will now use the consistent createLoanCard function
 });
+
