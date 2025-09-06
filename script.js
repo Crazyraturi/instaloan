@@ -188,21 +188,21 @@ const testimonialData = [
     name: "Ramesh Iyer",
     role: "Marketing Manager",
     image:
-      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1170&auto=format&fit=crop",
+      "https://i.pinimg.com/736x/f6/8b/07/f68b07afcf0acea994b7681e9caaff35.jpg",
     text: "I was impressed by the clarity and speed of service. Comparing offers from multiple lenders helped me find the best deal.",
   },
   {
-    name: "Sarah Johnson",
+    name: "Shubhamita Das",
     role: "Business Owner",
     image:
-      "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=687&auto=format&fit=crop",
+      "https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80",
     text: "The team exceeded our expectations with their professionalism and quick turnaround. Highly recommended.",
   },
   {
-    name: "Michael Chen",
+    name: "Rahul sharma",
     role: "Product Director",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      "https://plus.unsplash.com/premium_photo-1682089787056-9ac0c78a2ac2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWFuJTIwcGVvcGxlfGVufDB8fDB8fHww",
     text: "Working with this company transformed our business operations. Customer-first mentality sets them apart.",
   },
 ];
@@ -258,8 +258,8 @@ function initializeTestimonials() {
 // ================= Typing Effect =================
 document.addEventListener("DOMContentLoaded", function () {
   const dlTypingWords = [
-    "Gold Loan",
     "Personal Loan",
+    "High Payouts & Fast Disbursement",
     "Home Loan",
     "Business Loan",
     "Car Loan",
