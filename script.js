@@ -488,14 +488,12 @@ const loanData = {
     },
     {
       name: "CASHBACK SBI Credit_Card",
-      image:
-        "./images/sbicard.webp",
+      image: "./images/sbicard.webp",
       link: "available",
     },
     {
       name: "SBI Credit Card",
-      image:
-        "./images/sbicard.webp",
+      image: "./images/sbicard.webp",
       link: "available",
     },
   ],
@@ -1098,7 +1096,6 @@ const sampleData = {
         "Age: 23 years and above",
         "Applicant should be an Indian citizen",
         "Existing credit card holders of SBI are not eligible for the payout",
-        
       ],
     },
   ],
@@ -1124,9 +1121,8 @@ function createLoanCard(vendor, index, type) {
     <div class="loan-card p-4 mb-4">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center">
-          <img src="${vendor.image}" alt="${
-    vendor.name
-  }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:contain;border-radius:8px;">
+          <img src="${vendor.image}"  alt="${vendor.name}" class="vendor-logo">
+          <h5 class=" ms-5 fs-6 text-primary mt-1">${vendor.name}</h5>
           
         </div>
         
@@ -1403,7 +1399,6 @@ window.openLoanModal = openLoanModal;
 window.closeLoanModal = closeLoanModal;
 window.renderLoanCards = renderLoanCards;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openFormBtn");
   const closeBtn = document.getElementById("closeFormBtn");
@@ -1424,7 +1419,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 
 function animateCounter(element, target, suffix = "") {
   const duration = 2000; // 2 seconds
@@ -1489,4 +1483,3 @@ document.addEventListener("DOMContentLoaded", () => {
   const statsContainer = document.querySelector(".stats-container");
   observer.observe(statsContainer);
 });
-
