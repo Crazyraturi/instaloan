@@ -872,7 +872,11 @@
               <input type="text" class="form-control" id="fullName" required />
             </div>
             <div class="mb-3">
-              <label for="mobileNo" class="form-label">Mobile No</label>
+              <label for="emailId" class="form-label">Email</label>
+              <input type="email" class="form-control" id="emailId" required />
+            </div>
+            <div class="mb-3">
+              <label for="mobileNo" class="form-label">Phone</label>
               <input
                 type="tel"
                 class="form-control"
@@ -882,8 +886,29 @@
               />
             </div>
             <div class="mb-3">
-              <label for="emailId" class="form-label">Email ID</label>
-              <input type="email" class="form-control" id="emailId" required />
+              <label for="pan" class="form-label">PAN</label>
+              <input type="text" class="form-control" id="pan" maxlength="10" required />
+            </div>
+            <div class="mb-3">
+              <label for="aadhaar" class="form-label">Aadhaar</label>
+              <input type="text" class="form-control" id="aadhaar" maxlength="12" required />
+            </div>
+            <div class="mb-3">
+              <label for="experience" class="form-label">Experience (years)</label>
+              <input type="number" class="form-control" id="experience" min="0" required />
+            </div>
+            <div class="mb-3">
+              <label for="loanType" class="form-label">Loan Type</label>
+              <select class="form-select" id="loanType" multiple required>
+                <option value="Home Loan">Home Loan</option>
+                <option value="Business Loan">Business Loan</option>
+                <option value="Personal Loan">Personal Loan</option>
+                <option value="Auto Loan">Auto Loan</option>
+                <option value="Mortgage Loan">Mortgage Loan</option>
+                <option value="Education Loan">Education Loan</option>
+                <option value="Gold Loan">Gold Loan</option>
+              </select>
+              <small class="text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple</small>
             </div>
             <div class="form-check mb-3">
               <input
