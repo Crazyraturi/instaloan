@@ -1259,12 +1259,7 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(statsContainer);
 });
 
-// Add click event to Know More button
-document.querySelector(".know-more-btn").addEventListener("click", () => {
-  alert(
-    "Know More button clicked! You can add your custom functionality here."
-  );
-});
+
 
 // Add hover effects for additional interactivity
 document.querySelectorAll(".stat-item").forEach((item) => {
@@ -1411,14 +1406,6 @@ function createLoanCard(vendor, index, type) {
   `;
 }
 
-// Update your DOMContentLoaded event to render all sections consistently
-document.addEventListener("DOMContentLoaded", function () {
-  // Remove the separate renderCreditCards() call
-  // Use the unified renderLoanCards for all sections
-  renderLoanCards("personal", "personalLoansContainer");
-  renderLoanCards("business", "businessLoansContainer");
-  renderLoanCards("emi", "emiCardsContainer");
-  renderLoanCards("credit", "creditCardsContainer"); // Now uses the same modal system
 
   // Add event listeners for collapse toggles
   document.addEventListener("shown.bs.collapse", function (e) {
@@ -1434,7 +1421,6 @@ document.addEventListener("DOMContentLoaded", function () {
       toggle.innerHTML = 'Detailed Offers <i class="fas fa-chevron-down"></i>';
     }
   });
-});
 
 // Make sure your loanData.credit entries have proper structure
 // Add this to ensure credit cards work with the modal
@@ -1447,7 +1433,6 @@ const updatedCreditData = loanData.credit.map((card) => ({
 loanData.credit = updatedCreditData;
 
 
-// Replace the renderCreditCards function with this corrected version
 function renderCreditCards() {
   const container = document.getElementById("creditCardsContainer");
   if (!container) return;
@@ -1462,7 +1447,7 @@ function renderCreditCards() {
         <div class="loan-card p-4 mb-4">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="d-flex align-items-center">
-              <img src="${vendor.image}" alt="${vendor.name}" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:contain;border-radius:8px;">
+              <img src="${vendor.image}" alt="${vendor.name}" class="vendor-logo" 
             </div>
             
             <button class="btn apply-btn ${isComingSoon ? 'disabled' : ''}" 
@@ -1552,12 +1537,28 @@ function renderLoanCards(type, containerId) {
     .map((vendor, index) => createLoanCard(vendor, index, type))
     .join("");
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("openFormBtn");
+  const closeBtn = document.getElementById("closeFormBtn");
+  const popup = document.getElementById("popupForm");
 
-// Then update your DOMContentLoaded event to include:
-document.addEventListener("DOMContentLoaded", function () {
-  renderLoanCards("personal", "personalLoansContainer");
-  renderLoanCards("business", "businessLoansContainer");
-  renderLoanCards("emi", "emiCardsContainer");
-  renderLoanCards("credit", "creditCardsContainer"); // This will now use the consistent createLoanCard function
+  openBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+      document.body.classList.remove("no-scroll");
+    }
+  });
 });
+
+
+
+
 
