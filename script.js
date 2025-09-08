@@ -1,3 +1,321 @@
+// ================= Smooth Scrolling =================
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+// ================= Loan Calculator =================
+function formatCurrency(amount) {
+  return "₹" + amount.toLocaleString("en-IN");
+}
+
+function formatLargeAmount(amount) {
+  if (amount >= 1e7) return `₹${(amount / 1e7).toFixed(1)}Cr`;
+  if (amount >= 1e5) return `₹${(amount / 1e5).toFixed(1)}L`;
+  return formatCurrency(amount);
+}
+
+function calculateEMI(principal, rate, tenure) {
+  const monthlyRate = rate / (12 * 100);
+  if (monthlyRate === 0) return principal / tenure;
+  return (
+    (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
+    (Math.pow(1 + monthlyRate, tenure) - 1)
+  );
+}
+
+function updateChart(principal, interest) {
+  const principalArc = document.getElementById("principalArc");
+  const interestArc = document.getElementById("interestArc");
+
+  if (!principalArc || !interestArc) return;
+
+  const total = principal + interest;
+  if (total <= 0) return;
+
+  const circumference = 2 * Math.PI * 80; // radius = 80
+  const principalLength = (principal / total) * circumference;
+  const interestLength = (interest / total) * circumference;
+
+  // ✅ Update principal arc
+  principalArc.style.strokeDasharray = `${principalLength} ${circumference}`;
+  principalArc.style.strokeDashoffset = "0";
+
+  // ✅ Update interest arc after principal arc
+  interestArc.style.strokeDasharray = `${interestLength} ${circumference}`;
+  interestArc.style.strokeDashoffset = `-${principalLength}`;
+}
+
+function updateCalculations() {
+  const loanAmountSlider = document.getElementById("loanAmount");
+  const tenureSlider = document.getElementById("tenure");
+  const interestRateSlider = document.getElementById("interestRate");
+
+  if (!loanAmountSlider || !tenureSlider || !interestRateSlider) return;
+
+  // ✅ Convert slider values into numbers
+  const principal = parseFloat(loanAmountSlider.value) || 0;
+  const tenure = parseInt(tenureSlider.value) || 0;
+  const rate = parseFloat(interestRateSlider.value) || 0;
+
+  // Displays
+  const loanAmountDisplay = document.getElementById("loanAmountDisplay");
+  const tenureDisplay = document.getElementById("tenureDisplay");
+  const interestRateDisplay = document.getElementById("interestRateDisplay");
+  const monthlyEMI = document.getElementById("monthlyEMI");
+  const totalInterest = document.getElementById("totalInterest");
+  const totalPayable = document.getElementById("totalPayable");
+
+  if (loanAmountDisplay)
+    loanAmountDisplay.textContent = formatLargeAmount(principal);
+  if (tenureDisplay)
+    tenureDisplay.textContent =
+      tenure > 12
+        ? `${Math.floor(tenure / 12)} Years ${tenure % 12} Months`
+        : `${tenure} Months`;
+  if (interestRateDisplay) interestRateDisplay.textContent = `${rate}%`;
+
+  // ✅ EMI calculation
+  const emi = calculateEMI(principal, rate, tenure);
+  const totalAmount = emi * tenure;
+  const totalInterestAmount = totalAmount - principal;
+
+  // ✅ Update text values
+  if (monthlyEMI) monthlyEMI.textContent = formatCurrency(Math.round(emi));
+  if (totalInterest)
+    totalInterest.textContent = formatLargeAmount(
+      Math.round(totalInterestAmount)
+    );
+  if (totalPayable)
+    totalPayable.textContent = formatLargeAmount(Math.round(totalAmount));
+
+  // ✅ Update chart with principal vs interest
+  updateChart(principal, totalInterestAmount);
+  // ✅ Update chart
+  updateChart(principal, totalInterestAmount);
+}
+
+// ================= DOM Ready =================
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("App Initialized");
+
+  // Loan Calculator listeners
+  document
+    .getElementById("loanAmount")
+    ?.addEventListener("input", updateCalculations);
+  document
+    .getElementById("tenure")
+    ?.addEventListener("input", updateCalculations);
+  document
+    .getElementById("interestRate")
+    ?.addEventListener("input", updateCalculations);
+
+  updateCalculations();
+
+  // Modal close listeners
+  window.addEventListener("click", (e) => {
+    const modal = document.getElementById("loanModal");
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Carousel Init
+  const loanCarousel = document.querySelector("#loanCarousel");
+  if (loanCarousel && typeof bootstrap !== "undefined") {
+    const bsLoanCarousel = new bootstrap.Carousel(loanCarousel, {
+      interval: 4000,
+      wrap: true,
+    });
+    loanCarousel.addEventListener("mouseenter", () => bsLoanCarousel.pause());
+    loanCarousel.addEventListener("mouseleave", () => bsLoanCarousel.cycle());
+  }
+  if (
+    document.querySelector("#featuresCarousel") &&
+    typeof bootstrap !== "undefined"
+  )
+    new bootstrap.Carousel("#featuresCarousel", { interval: 8000, wrap: true });
+  if (
+    document.querySelector("#customerCarousel") &&
+    typeof bootstrap !== "undefined"
+  )
+    new bootstrap.Carousel("#customerCarousel", { interval: 5000, wrap: true });
+
+  // Feature card click effect
+  document.querySelectorAll(".feature-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.style.transform = "scale(0.95)";
+      setTimeout(() => (card.style.transform = ""), 150);
+    });
+  });
+
+  // Testimonials
+  initializeTestimonials();
+
+  // Show/hide back to top button on scroll
+  window.addEventListener("scroll", function () {
+    const btn = document.getElementById("backToTopBtn");
+    if (window.scrollY > 300) {
+      btn.style.display = "flex";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  // Hide by default
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("backToTopBtn");
+    if (btn) btn.style.display = "none";
+  });
+});
+
+// ================= Testimonials =================
+const testimonialData = [
+  {
+    name: "Ramesh Iyer",
+    role: "Marketing Manager",
+    image:
+      "https://i.pinimg.com/736x/f6/8b/07/f68b07afcf0acea994b7681e9caaff35.jpg",
+    text: "I was impressed by the clarity and speed of service. Comparing offers from multiple lenders helped me find the best deal.",
+  },
+  {
+    name: "Shubhamita Das",
+    role: "Business Owner",
+    image:
+      "https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80",
+    text: "The team exceeded our expectations with their professionalism and quick turnaround. Highly recommended.",
+  },
+  {
+    name: "Rahul sharma",
+    role: "Product Director",
+    image:
+      "https://plus.unsplash.com/premium_photo-1682089787056-9ac0c78a2ac2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWFuJTIwcGVvcGxlfGVufDB8fDB8fHww",
+    text: "Working with this company transformed our business operations. Customer-first mentality sets them apart.",
+  },
+];
+
+let currentTestimonialIndex = 0;
+
+function updateTestimonialDisplay() {
+  const current = testimonialData[currentTestimonialIndex];
+  document.querySelector(".testimonial-client-info h3").textContent =
+    current.name;
+  document.querySelector(".testimonial-client-role").textContent = current.role;
+  document.querySelector(".testimonial-avatar-image").src = current.image;
+  document.querySelector(".testimonial-review-text").textContent = current.text;
+  document
+    .querySelectorAll(".testimonial-nav-dot")
+    .forEach((dot, i) =>
+      dot.classList.toggle("active-dot", i === currentTestimonialIndex)
+    );
+}
+
+function nextTestimonial() {
+  currentTestimonialIndex =
+    (currentTestimonialIndex + 1) % testimonialData.length;
+  updateTestimonialDisplay();
+}
+
+function prevTestimonial() {
+  currentTestimonialIndex =
+    (currentTestimonialIndex - 1 + testimonialData.length) %
+    testimonialData.length;
+  updateTestimonialDisplay();
+}
+
+function initializeTestimonials() {
+  document
+    .getElementById("nextBtn")
+    ?.addEventListener("click", nextTestimonial);
+  document
+    .getElementById("prevBtn")
+    ?.addEventListener("click", prevTestimonial);
+
+  document.querySelectorAll(".testimonial-nav-dot").forEach((dot, i) =>
+    dot.addEventListener("click", () => {
+      currentTestimonialIndex = i;
+      updateTestimonialDisplay();
+    })
+  );
+
+  setInterval(nextTestimonial, 6000);
+  updateTestimonialDisplay();
+}
+
+// ================= Typing Effect =================
+document.addEventListener("DOMContentLoaded", function () {
+  const dlTypingWords = [
+    "Personal Loan",
+    "High Payouts & Fast Disbursement",
+    "Home Loan",
+    "Business Loan",
+    "Car Loan",
+    "Education Loan",
+    "Insurance Needs",
+    "Investment Plans",
+    "Credit Cards",
+    "Quick Cash",
+  ];
+
+  let dlCurrentWordIndex = 0;
+  let dlCurrentCharIndex = 0;
+  let dlIsDeleting = false;
+  const dlTypedElement = document.getElementById("dlTypedText");
+
+  function dlTypeEffect() {
+    if (!dlTypedElement) return;
+    const dlCurrentWord = dlTypingWords[dlCurrentWordIndex];
+
+    if (!dlIsDeleting) {
+      dlTypedElement.textContent = dlCurrentWord.substring(
+        0,
+        dlCurrentCharIndex + 1
+      );
+      dlCurrentCharIndex++;
+
+      if (dlCurrentCharIndex === dlCurrentWord.length) {
+        dlIsDeleting = true;
+        setTimeout(dlTypeEffect, 2000);
+        return;
+      }
+    } else {
+      dlTypedElement.textContent = dlCurrentWord.substring(
+        0,
+        dlCurrentCharIndex - 1
+      );
+      dlCurrentCharIndex--;
+
+      if (dlCurrentCharIndex === 0) {
+        dlIsDeleting = false;
+        dlCurrentWordIndex = (dlCurrentWordIndex + 1) % dlTypingWords.length;
+        setTimeout(dlTypeEffect, 500);
+        return;
+      }
+    }
+
+    const dlTypingSpeed = dlIsDeleting ? 100 : 150;
+    setTimeout(dlTypeEffect, dlTypingSpeed);
+  }
+
+  dlTypeEffect();
+});
+
+// ================= FAQ Toggle =================
+function toggleFaq(link) {
+  const faq = link.nextElementSibling;
+  if (faq.style.display === "none" || faq.style.display === "") {
+    faq.style.display = "block";
+    link.textContent = "Hide Details -";
+  } else {
+    faq.style.display = "none";
+    link.textContent = "Detailed Offers +";
+  }
+}
+
 // ================= Fixed Loan Card System =================
 
 const loanData = {
@@ -341,7 +659,7 @@ function createLoanCard(vendor, index, type) {
           <img src="${vendor.image}" alt="${
     vendor.name
   }" class="vendor-logo me-3" style="width:150px;height:50px; object-fit:contain;border-radius:8px;">
-          <h5 class="mb-0">${vendor.name}</h5>
+          
         </div>
         
         <button class="btn apply-btn ${isComingSoon ? "disabled" : ""}" 
@@ -441,12 +759,12 @@ function createLoanCard(vendor, index, type) {
               </div>
             </div>
           </div>
-          
+         <hr>
           <!-- Product Benefits Section -->
-          ${
-            data.productBenefits
-              ? `
-            <div class="benefits mt-4 pt-3 border-top">
+         <div class= "d-flex justify-content-evenly"> ${
+           data.productBenefits
+             ? `
+            <div class="benefits mt-4 ">
               <h6 class="fw-bold mb-3 text-primary">
                 <i class="fas fa-gift me-2"></i>Product Benefits
               </h6>
@@ -468,14 +786,15 @@ function createLoanCard(vendor, index, type) {
               </div>
             </div>
           `
-              : ""
-          }
+             : ""
+         }
           
           <!-- Whom to Sale Section -->
+         
           ${
             data.whomToSale
               ? `
-            <div class="target-customers mt-4 pt-3 border-top">
+            <div class="target-customers mt-4 pt-3 ">
               <h6 class="fw-bold mb-3 text-info">
                 <i class="fas fa-users me-2"></i>Whom to Sale
               </h6>
@@ -498,7 +817,7 @@ function createLoanCard(vendor, index, type) {
             </div>
           `
               : ""
-          }
+          }</div>
         </div>
       </div>
     </div>
@@ -615,3 +934,91 @@ document.addEventListener("DOMContentLoaded", function () {
 window.openLoanModal = openLoanModal;
 window.closeLoanModal = closeLoanModal;
 window.renderLoanCards = renderLoanCards;
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("openFormBtn");
+  const closeBtn = document.getElementById("closeFormBtn");
+  const popup = document.getElementById("popupForm");
+
+  openBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+      document.body.classList.remove("no-scroll");
+    }
+  });
+});
+
+
+function animateCounter(element, target, suffix = "") {
+  const duration = 2000; // 2 seconds
+  const steps = 60;
+  const increment = target / steps;
+  let current = 0;
+  let step = 0;
+
+  const timer = setInterval(() => {
+    step++;
+    current = Math.min(increment * step, target);
+
+    if (target >= 1000) {
+      // Format large numbers with commas
+      element.textContent = Math.floor(current).toLocaleString() + suffix;
+    } else {
+      element.textContent = Math.floor(current) + suffix;
+    }
+
+    if (step >= steps) {
+      clearInterval(timer);
+      // Ensure final value is exact
+      if (target >= 1000) {
+        element.textContent = target.toLocaleString() + suffix;
+      } else {
+        element.textContent = target + suffix;
+      }
+    }
+  }, duration / steps);
+}
+
+// Intersection Observer for triggering animations when in view
+const observerOptions = {
+  threshold: 0.3,
+  rootMargin: "0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const statItems = entry.target.querySelectorAll(".stat-item");
+
+      statItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("animated");
+
+          const numberElement = item.querySelector(".stat-number");
+          const target = parseInt(numberElement.dataset.target);
+          const suffix = numberElement.dataset.suffix || "";
+
+          animateCounter(numberElement, target, suffix);
+        }, index * 200); // Stagger the animations
+      });
+
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Start observing when page loads
+document.addEventListener("DOMContentLoaded", () => {
+  const statsContainer = document.querySelector(".stats-container");
+  observer.observe(statsContainer);
+});
+
