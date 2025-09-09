@@ -624,10 +624,11 @@ const sampleData = {
     },
   ],
   instant: [
+    // poonawalla
     {
-      amount: "₹ 5,00,000",
+      amount: "₹5,00,000",
       rate: "18%",
-      fee: "2% to 4% + GST",
+      fee: "	2.5% to 3.5% + GST",
       tenure: "3 Years",
       income: "20,000 & above",
       age: "22 - 58 years",
@@ -648,13 +649,14 @@ const sampleData = {
         "KYC Documents: PAN Card/Aadhaar Card/Driving License/Voter ID/Passport",
       ],
     },
+    // aditya brla personal loan
     {
-      amount: "₹ 10,00,000",
-      rate: "15%",
-      fee: "1% to 3% + GST",
-      tenure: "5 Years",
-      income: "25,000 & above",
-      age: "21 - 60 years",
+      amount: "₹ ₹ 5,00,000",
+      rate: "13.25%",
+      fee: "1.75% to 4.75%  + GST",
+      tenure: "4 Years",
+      income: "20,000 & above",
+      age: "23 - 60 years",
       productBenefits: [
         "📱 100% digital application and verification Process",
         "🗓 Flexible tenure from 12 to 48 Months",
@@ -748,12 +750,12 @@ const sampleData = {
       ],
     },
     {
-      amount: "₹ 2,00,000",
-      rate: "24%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
-      income: "15,000 & above",
-      age: "23 - 55 years",
+      amount: "₹ 3,00,000",
+      rate: "17.99%",
+      fee: "3% to 5%  + GST",
+      tenure: "3 Years",
+      income: "18,000 & above",
+      age: "22 - 55 years",
       productBenefits: [
         "COUPON CODE: DSA100 - Up to 100% off on processing fees ",
         "COUPON CODE: KRED50 - Up to 50℅ off on PF for General users",
@@ -778,12 +780,12 @@ const sampleData = {
   ],
   business: [
     {
-      amount: "₹ 50,00,000",
+      amount: "₹ 500,000",
       rate: "12%",
-      fee: "1% to 2% + GST",
-      tenure: "5 Years",
-      turnover: "10 Lakhs & above",
-      age: "2+ years",
+      fee: "2% to 5% + GST",
+      tenure: "3 Years",
+      turnover: "20,000 & above",
+      age: "23-55 years",
       productBenefits: [
         "High loan amount for business growth",
         "Attractive interest rates for businesses",
