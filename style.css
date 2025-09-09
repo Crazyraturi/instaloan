@@ -116,6 +116,12 @@ body {
   margin-bottom: 2rem;
 }
 
+@media(max-width=400px){
+  .title-primary{
+    font-size: 32px;
+  }
+}
+
 .dl-typing-container {
   height: 80px;
   display: flex;
