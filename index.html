@@ -16,7 +16,7 @@
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg  px-lg-5" id="home">
+    <nav class="navbar navbar-expand-lg px-lg-5" id="home">
       <a class="navbar-brand" href="#">
         <img src="/logo.png" alt="InstaLoan Logo" />
       </a>
@@ -44,7 +44,9 @@
             <a class="nav-link" href="#Calculator"> EMI Calculator</a>
           </li>
           <li class="partner-btn">
-            <a class="text-white" href="#">Become a partner</a>
+            <a class="text-white" onclick="openContactModal()" href="#"
+              >Become a partner</a
+            >
           </li>
         </ul>
       </div>
@@ -57,8 +59,7 @@
           <div class="col-lg-10">
             <div class="dl-hero-content">
               <h1 class="dl-main-title">
-                Find the perfect 
-                Financial Solutions for<br />
+                Find the perfect Financial Solutions for<br />
                 Your
               </h1>
               <div class="dl-typing-container">
@@ -108,8 +109,9 @@
                       class="lucide lucide-arrow-right-icon lucide-arrow-right"
                     >
                       <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" /></svg></span
-                  > Personal Loans, Business Loans, Home Loans<br />
+                      <path d="m12 5 7 7-7 7" /></svg
+                  ></span>
+                  Personal Loans, Business Loans, Home Loans<br />
                   <span
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -124,8 +126,9 @@
                       class="lucide lucide-arrow-right-icon lucide-arrow-right"
                     >
                       <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" /></svg></span
-                  > Auto Loans, Gold Loans, Education Loans <br />
+                      <path d="m12 5 7 7-7 7" /></svg
+                  ></span>
+                  Auto Loans, Gold Loans, Education Loans <br />
                   <span
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -140,8 +143,9 @@
                       class="lucide lucide-arrow-right-icon lucide-arrow-right"
                     >
                       <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" /></svg></span
-                  > Insurance, Credit Cards, Mortgage Loans<br />
+                      <path d="m12 5 7 7-7 7" /></svg
+                  ></span>
+                  Insurance, Credit Cards, Mortgage Loans<br />
                   <span
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -156,8 +160,9 @@
                       class="lucide lucide-arrow-right-icon lucide-arrow-right"
                     >
                       <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" /></svg></span
-                  > Working Capital, Commercial Vehicle Loans <br /><span
+                      <path d="m12 5 7 7-7 7" /></svg
+                  ></span>
+                  Working Capital, Commercial Vehicle Loans <br /><span
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -176,7 +181,7 @@
                   Medical Equipment Loans, Solar Equipment Loans</strong
                 >
                 <br />
-                 &nbsp; &nbsp; against securities.
+                &nbsp; &nbsp; against securities.
               </p>
             </div>
           </div>
@@ -193,7 +198,6 @@
                   class="img-fluid"
                 />
               </div>
-              
             </div>
           </div>
         </div>
@@ -284,7 +288,6 @@
     </div>
 
     <!-- ------------------------------------------ -->
-    
 
     <!-- thousand of customers -->
     <div class="hero-section">
@@ -451,173 +454,191 @@
       </div>
     </div>
 
-        <!-- cooming soon section -->
-    <div class="text-center mt-5 mb-5">
-      <span
-        style="
-          color: #e53935;
-          font-weight: bold;
-          font-size: 1.1rem;
-          background: #fff3f3;
-          padding: 10px 24px;
-          border-radius: 8px;
-          display: inline-block;
-        "
-      >
-        Coming soon : Home Loan, Mortgage Loan, Auto Loan, Commercial Purchase
-        Loan, Overdraft (OD) Limit, Construction Loan.
-      </span>
-    </div>
-
     <!-- calculator  -->
-    <div class="calculator-container" id="Calculator">
-      <div class="header">
+    <div class="loan-calculator-container m-auto mt-5">
+      <div class="calculator-header">
         <h1>How much do you need loan for you?</h1>
         <p>Calculate your loan EMI with our interactive calculator</p>
       </div>
 
-      <div class="calculator-content align-middle">
-        <div class="controls">
-          <div class="control-group">
-            <div class="control-label">
+      <div class="calculator-content">
+        <div class="input-section">
+          <!-- Loan Amount -->
+          <div class="input-group-enhanced">
+            <div class="input-label-enhanced">
               <span>Loan Amount</span>
-              <div class="control-value" id="loanAmountDisplay">₹17,33,200</div>
+              <div class="input-value-display" id="loanAmountDisplay">
+                ₹17,33,200
+              </div>
             </div>
-            <div class="slider-container">
+            <div class="input-controls-enhanced">
+              <input
+                type="text"
+                class="manual-input-enhanced"
+                id="loanAmountInput"
+                placeholder="Enter amount"
+                value="1733200"
+              />
               <input
                 type="range"
-                class="slider"
+                class="slider-enhanced"
                 id="loanAmount"
                 min="100000"
                 max="5000000"
                 value="1733200"
-                step="1000"
+                step="10000"
               />
-              <div class="slider-labels">
-                <span>₹1L</span>
-                <span>₹50L</span>
-              </div>
+            </div>
+            <div class="range-labels-enhanced">
+              <span>₹1L</span>
+              <span>₹50L</span>
             </div>
           </div>
 
-          <div class="control-group">
-            <div class="control-label">
+          <!-- Loan Tenure -->
+          <div class="input-group-enhanced">
+            <div class="input-label-enhanced">
               <span>Loan Tenure</span>
-              <div class="control-value" id="tenureDisplay">19 Months</div>
+              <div class="input-value-display" id="tenureDisplay">
+                19 Months
+              </div>
             </div>
-            <div class="slider-container">
+            <div class="input-controls-enhanced">
+              <input
+                type="number"
+                class="manual-input-enhanced"
+                id="tenureInput"
+                placeholder="Enter months"
+                value="19"
+                min="6"
+                max="360"
+              />
               <input
                 type="range"
-                class="slider"
+                class="slider-enhanced"
                 id="tenure"
                 min="6"
                 max="360"
                 value="19"
-                step="1"
               />
-              <div class="slider-labels">
-                <span>6 Months</span>
-                <span>30 Years</span>
-              </div>
+            </div>
+            <div class="range-labels-enhanced">
+              <span>6 Months</span>
+              <span>30 Years</span>
             </div>
           </div>
 
-          <div class="control-group">
-            <div class="control-label">
+          <!-- Interest Rate -->
+          <div class="input-group-enhanced">
+            <div class="input-label-enhanced">
               <span>Interest Rate</span>
-              <div class="control-value" id="interestRateDisplay">18.6%</div>
+              <div class="input-value-display" id="interestRateDisplay">
+                18.6%
+              </div>
             </div>
-            <div class="slider-container">
+            <div class="input-controls-enhanced">
+              <input
+                type="number"
+                class="manual-input-enhanced"
+                id="interestRateInput"
+                placeholder="Enter rate"
+                value="18.6"
+                min="1"
+                max="30"
+                step="0.1"
+              />
               <input
                 type="range"
-                class="slider"
+                class="slider-enhanced"
                 id="interestRate"
                 min="1"
                 max="30"
                 value="18.6"
                 step="0.1"
               />
-              <div class="slider-labels">
-                <span>1%</span>
-                <span>30%</span>
-              </div>
+            </div>
+            <div class="range-labels-enhanced">
+              <span>1%</span>
+              <span>30%</span>
             </div>
           </div>
         </div>
 
-        <div class="results">
-          <div class="monthly-emi">
+        <div class="results-section">
+          <div class="monthly-emi-display">
             <h3>Monthly EMI</h3>
-            <div class="emi-amount" id="monthlyEMI">₹1,06,011.19</div>
+            <div class="amount" id="monthlyEMI">₹1,06,011.19</div>
           </div>
 
           <div class="chart-container">
-            <svg
-              class="donut-chart"
-              width="200"
-              height="200"
-              viewBox="0 0 200 200"
-            >
+            <svg class="chart-svg" viewBox="0 0 180 180">
               <circle
-                cx="100"
-                cy="100"
+                cx="90"
+                cy="90"
                 r="80"
                 fill="none"
-                stroke="#e2e8f0"
+                stroke="#e5e7eb"
                 stroke-width="20"
               />
               <circle
-                id="principalArc"
-                cx="100"
-                cy="100"
+                cx="90"
+                cy="90"
                 r="80"
                 fill="none"
-                stroke="#3b82f6"
+                stroke="#4f46e5"
                 stroke-width="20"
-                stroke-dasharray="0 502.4"
+                id="principalArc"
+                stroke-dasharray="0 502"
+                stroke-dashoffset="0"
+                transform="rotate(-90 90 90)"
                 stroke-linecap="round"
               />
               <circle
-                id="interestArc"
-                cx="100"
-                cy="100"
+                cx="90"
+                cy="90"
                 r="80"
                 fill="none"
-                stroke="#8b5cf6"
+                stroke="#ec4899"
                 stroke-width="20"
-                stroke-dasharray="0 502.4"
+                id="interestArc"
+                stroke-dasharray="0 502"
+                stroke-dashoffset="0"
+                transform="rotate(-90 90 90)"
                 stroke-linecap="round"
               />
             </svg>
-          </div>
-
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-color principal-color"></div>
-              <span class="legend-text">Principal Amount</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color interest-color"></div>
-              <span class="legend-text">Interest Amount</span>
-            </div>
-          </div>
-
-          <div class="summary">
-            <div class="summary-item">
-              <span class="summary-label">Total Interest</span>
-              <span class="summary-value" id="totalInterest"
-                >₹28,10,245.57</span
-              >
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">Total Amount Payable</span>
-              <span class="summary-value" id="totalPayable"
-                >₹20,14,22,45.57</span
-              >
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: #4f46e5"
+                ></div>
+                <span>Principal Amount</span>
+              </div>
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: #ec4899"
+                ></div>
+                <span>Interest Amount</span>
+              </div>
             </div>
           </div>
 
-          <button class="apply-button" id="openFormBtn">
+          <div class="summary-item">
+            <span class="summary-label">Total Interest</span>
+            <span class="summary-value" id="totalInterest">₹28,10,245.57</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="summary-label">Total Amount Payable</span>
+            <span class="summary-value" id="totalPayable">₹20,14,22,45.57</span>
+          </div>
+
+          <button
+            class="apply-button-enhanced"
+            onclick="location.href='#loans'"
+          >
             Apply For Loan
           </button>
         </div>
@@ -707,86 +728,88 @@
       </div>
     </section>
 
- <footer class="footer mt-5">
-  <div class="container">
-    <div class="row footer-row">
+    <footer class="footer mt-5">
+      <div class="container">
+        <div class="row footer-row">
+          <!-- About -->
+          <div class="footer-col">
+            <h5>About</h5>
+            <p style="color: #adb5bd">
+              Providing quick and reliable financial solutions across India.
+            </p>
+            <p style="color: #adb5bd">
+              <span style="font-size: 16px; font-weight: bold"
+                >Cotton Master :</span
+              >
+              GST No.(24ECKPK4875B1ZK)
+            </p>
+            <p style="color: #adb5bd">
+              <span style="font-weight: bold; font-size: 16px">Address :</span>
+              Suman Uday Apartment Opp SD jain college Vesu Surat Gujarat 395007
+            </p>
+            <div class="d-flex gap-3">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
 
-      <!-- About -->
-      <div class="footer-col">
-        <h5>About</h5>
-        <p style="color: #adb5bd">
-          Providing quick and reliable financial solutions across India.
-        </p>
-        <p style="color: #adb5bd">
-          <span style="font-size:16px; font-weight:bold">Cotton Master :</span> GST No.(24ECKPK4875B1ZK)
-        </p>
-        <p style="color: #adb5bd">
-          <span style="font-weight:bold; font-size:16px">Address :</span> Suman Uday Apartment Opp SD jain college Vesu Surat Gujarat 395007
-        </p>
-        <div class="d-flex gap-3">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <!-- Quick Links -->
+          <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#Calculator">EMI Calculator</a></li>
+              <li><a href="#home">Join as a DSA Partner</a></li>
+            </ul>
+          </div>
+
+          <!-- Loan Services -->
+          <div class="footer-col">
+            <h5>Loan Services</h5>
+            <ul class="list-unstyled">
+              <li><a href="#loans">Instant Loan</a></li>
+              <li><a href="#loans">Personal Loan</a></li>
+              <li><a href="#loans">Business Loan</a></li>
+              <li><a href="#loans">Credit Card</a></li>
+              <li><a href="#loans">Gold Loan</a></li>
+              <li><a href="#loans">Auto Loan</a></li>
+              <li><a href="#loans">Education Loan</a></li>
+            </ul>
+          </div>
+
+          <!-- Associate Partner -->
+          <div class="footer-col">
+            <h5>Timing</h5>
+            <p style="color: #adb5bd">10:00 AM TO 7:00 PM</p>
+            <h5>Associate Partner</h5>
+
+            <ul class="list-unstyled">
+              <li><a href="#">Bvalue Services Pvt. Ltd.</a></li>
+              <li><a href="#">Starpowerz Digiloans Pvt. Ltd.</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Us -->
+          <div class="footer-col">
+            <h5>Contact Us</h5>
+            <ul class="list-unstyled">
+              <li style="color: #adb5bd">info@instantloanbazaar.com</li>
+              <li style="color: #adb5bd">+91 9909990564</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="site-infor-col">
+            Copyright © 2025 Insta loan Designed & Developed By
+            <a href="https://digitalutilization.com/">SEO Company In Noida</a>
+          </div>
         </div>
       </div>
-
-      <!-- Quick Links -->
-      <div class="footer-col">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#Calculator">EMI Calculator</a></li>
-          <li><a href="#home">Join as a DSA Partner</a></li>
-        </ul>
-      </div>
-
-      <!-- Loan Services -->
-      <div class="footer-col">
-        <h5>Loan Services</h5>
-        <ul class="list-unstyled">
-          <li><a href="#loans">Instant Loan</a></li>
-          <li><a href="#loans">Personal Loan</a></li>
-          <li><a href="#loans">Business Loan</a></li>
-          <li><a href="#loans">Credit Card</a></li>
-          <li><a href="#loans">Gold Loan</a></li>
-          <li><a href="#loans">Auto Loan</a></li>
-          <li><a href="#loans">Education Loan</a></li>
-        </ul>
-      </div>
-
-      <!-- Associate Partner -->
-      <div class="footer-col">
-        <h5>Associate Partner</h5>
-        <p style="color: #adb5bd"><strong>Timing:</strong> 10:00 AM TO 7:00 PM</p>
-        <ul class="list-unstyled">
-          <li><a href="#">Bvalue Services Pvt. Ltd.</a></li>
-          <li><a href="#">Starpowerz Digiloans Pvt. Ltd.</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact Us -->
-      <div class="footer-col">
-        <h5>Contact Us</h5>
-        <ul class="list-unstyled">
-          <li style="color: #adb5bd">info@instantloanbazaar.com</li>
-          <li style="color: #adb5bd"> +91 9909990564</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <div class="site-infor-col">
-        Copyright © 2025 Insta loan Designed & Developed By 
-        <a href="https://digitalutilization.com/">SEO Company In Noida</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-
+    </footer>
 
     <!-- Contact Modal -->
     <div id="contactModal" class="modal" tabindex="-1" style="display: none">
@@ -804,7 +827,7 @@
             "
             >&times;</span
           >
-          <h3 class="mb-3">Became a Partner</h3>
+          <h3 class="mb-3">Became a DSA Partner</h3>
           <form id="contactForm">
             <div class="mb-3">
               <label for="contactName" class="form-label">Name</label>
@@ -834,13 +857,63 @@
               />
             </div>
             <div class="mb-3">
-              <label for="contactMessage" class="form-label">Message</label>
-              <textarea
+              <label for="aadhaar" class="form-label">Aadhaar</label>
+              <input
+                type="text"
                 class="form-control"
-                id="contactMessage"
-                rows="3"
+                id="aadhaar"
+                maxlength="12"
                 required
-              ></textarea>
+              />
+            </div>
+            <div class="mb-3">
+              <label for="pan" class="form-label">PAN</label>
+              <input
+                type="text"
+                class="form-control"
+                id="pan"
+                maxlength="10"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="experience" class="form-label"
+                >Experience (years)</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="experience"
+                min="0"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="loanType" class="form-label">Loan Type</label>
+              <select class="form-select" id="loanType" multiple required>
+                <option value="Home Loan">Home Loan</option>
+                <option value="Business Loan">Business Loan</option>
+                <option value="Personal Loan">Personal Loan</option>
+                <option value="Auto Loan">Auto Loan</option>
+                <option value="Mortgage Loan">Mortgage Loan</option>
+                <option value="Education Loan">Education Loan</option>
+                <option value="Gold Loan">Gold Loan</option>
+              </select>
+              <small class="text-muted"
+                >Hold Ctrl (Windows) or Cmd (Mac) to select multiple</small
+              >
+            </div>
+            <div class="form-check mb-3">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="acceptPolicy"
+                required
+              />
+              <label class="form-check-label" for="acceptPolicy">
+                I accept <a href="#">Privacy Policy</a> and
+                <a href="#">Terms & Conditions</a>
+              </label>
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
           </form>
@@ -920,42 +993,18 @@
             </div>
             <div class="mb-3">
               <label for="pan" class="form-label">PAN</label>
-              <input type="text" class="form-control" id="pan" maxlength="10" required />
-            </div>
-            <!-- <div class="mb-3">
-              <label for="aadhaar" class="form-label">Aadhaar</label>
-              <input type="text" class="form-control" id="aadhaar" maxlength="12" required />
-            </div>
-            <div class="mb-3">
-              <label for="experience" class="form-label">Experience (years)</label>
-              <input type="number" class="form-control" id="experience" min="0" required />
-            </div>
-            <div class="mb-3">
-              <label for="loanType" class="form-label">Loan Type</label>
-              <select class="form-select" id="loanType" multiple required>
-                <option value="Home Loan">Home Loan</option>
-                <option value="Business Loan">Business Loan</option>
-                <option value="Personal Loan">Personal Loan</option>
-                <option value="Auto Loan">Auto Loan</option>
-                <option value="Mortgage Loan">Mortgage Loan</option>
-                <option value="Education Loan">Education Loan</option>
-                <option value="Gold Loan">Gold Loan</option>
-              </select>
-              <small class="text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple</small>
-            </div>
-            <div class="form-check mb-3">
               <input
-                type="checkbox"
-                class="form-check-input"
-                id="acceptPolicy"
+                type="text"
+                class="form-control"
+                id="pan"
+                maxlength="10"
                 required
               />
-              <label class="form-check-label" for="acceptPolicy">
-                I accept <a href="#">Privacy Policy</a> and
-                <a href="#">Terms & Conditions</a>
-              </label>
-            </div> -->
-            <button type="submit" class="btn btn-primary w-100">Apply</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              Apply/Login
+            </button>
           </form>
         </div>
       </div>
@@ -999,31 +1048,29 @@
     </style>
 
     <!-- Popup Background -->
-<div id="popupForm" class="popup">
-  <div class="popup-content">
- <div class="d-flex justify-content-between">    
-    <span class="mt-0 fs-5 fw-bold"> Loan Application  Form</span>
-  <span id="closeFormBtn" class="close ">&times;</span>
-</div>
-    <form>
-      <label>Name</label>
-      <input type="text" required>
-      
-      <label>Email</label>
-      <input type="email" required>
-      
-      <label>Message</label>
-      <textarea required></textarea>
-       <p>our team contact you shortly!</p>
-      
-      <button type="submit">Send</button>
-     
-    </form>
-  </div>
-</div>
+    <div id="popupForm" class="popup">
+      <div class="popup-content">
+        <div class="d-flex justify-content-between">
+          <span class="mt-0 fs-5 fw-bold"> Loan Application Form</span>
+          <span id="closeFormBtn" class="close">&times;</span>
+        </div>
+        <form>
+          <label>Name</label>
+          <input type="text" required />
 
- <script src="./script.js"></script>
+          <label>Email</label>
+          <input type="email" required />
+
+          <label>Message</label>
+          <textarea required></textarea>
+          <p>our team contact you shortly!</p>
+
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
   </body>
 </html>

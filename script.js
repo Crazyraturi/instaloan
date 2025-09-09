@@ -8,95 +8,159 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // ================= Loan Calculator =================
-function formatCurrency(amount) {
-  return "₹" + amount.toLocaleString("en-IN");
-}
+ // Currency formatting functions
+        function formatCurrency(amount) {
+            return "₹" + amount.toLocaleString("en-IN");
+        }
 
-function formatLargeAmount(amount) {
-  if (amount >= 1e7) return `₹${(amount / 1e7).toFixed(1)}Cr`;
-  if (amount >= 1e5) return `₹${(amount / 1e5).toFixed(1)}L`;
-  return formatCurrency(amount);
-}
+        function formatLargeAmount(amount) {
+            if (amount >= 1e7) return `₹${(amount / 1e7).toFixed(1)}Cr`;
+            if (amount >= 1e5) return `₹${(amount / 1e5).toFixed(1)}L`;
+            return formatCurrency(amount);
+        }
 
-function calculateEMI(principal, rate, tenure) {
-  const monthlyRate = rate / (12 * 100);
-  if (monthlyRate === 0) return principal / tenure;
-  return (
-    (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
-    (Math.pow(1 + monthlyRate, tenure) - 1)
-  );
-}
+        // EMI calculation function
+        function calculateEMI(principal, rate, tenure) {
+            const monthlyRate = rate / (12 * 100);
+            if (monthlyRate === 0) return principal / tenure;
+            return (
+                (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
+                (Math.pow(1 + monthlyRate, tenure) - 1)
+            );
+        }
 
-function updateChart(principal, interest) {
-  const principalArc = document.getElementById("principalArc");
-  const interestArc = document.getElementById("interestArc");
+        // Chart update function
+        function updateChart(principal, interest) {
+            const principalArc = document.getElementById("principalArc");
+            const interestArc = document.getElementById("interestArc");
 
-  if (!principalArc || !interestArc) return;
+            if (!principalArc || !interestArc) return;
 
-  const total = principal + interest;
-  if (total <= 0) return;
+            const total = principal + interest;
+            if (total <= 0) return;
 
-  const circumference = 2 * Math.PI * 80; // radius = 80
-  const principalLength = (principal / total) * circumference;
-  const interestLength = (interest / total) * circumference;
+            const circumference = 2 * Math.PI * 80;
+            const principalLength = (principal / total) * circumference;
+            const interestLength = (interest / total) * circumference;
 
-  // ✅ Update principal arc
-  principalArc.style.strokeDasharray = `${principalLength} ${circumference}`;
-  principalArc.style.strokeDashoffset = "0";
+            principalArc.style.strokeDasharray = `${principalLength} ${circumference}`;
+            principalArc.style.strokeDashoffset = "0";
 
-  // ✅ Update interest arc after principal arc
-  interestArc.style.strokeDasharray = `${interestLength} ${circumference}`;
-  interestArc.style.strokeDashoffset = `-${principalLength}`;
-}
+            interestArc.style.strokeDasharray = `${interestLength} ${circumference}`;
+            interestArc.style.strokeDashoffset = `-${principalLength}`;
+        }
 
-function updateCalculations() {
-  const loanAmountSlider = document.getElementById("loanAmount");
-  const tenureSlider = document.getElementById("tenure");
-  const interestRateSlider = document.getElementById("interestRate");
+        // Parse number from formatted string
+        function parseAmount(value) {
+            if (typeof value === 'string') {
+                return parseFloat(value.replace(/[^\d.]/g, '')) || 0;
+            }
+            return parseFloat(value) || 0;
+        }
 
-  if (!loanAmountSlider || !tenureSlider || !interestRateSlider) return;
+        // Main calculation and update function
+        function updateCalculations() {
+            // Get values from sliders and inputs
+            const loanAmountSlider = document.getElementById("loanAmount");
+            const tenureSlider = document.getElementById("tenure");
+            const interestRateSlider = document.getElementById("interestRate");
 
-  // ✅ Convert slider values into numbers
-  const principal = parseFloat(loanAmountSlider.value) || 0;
-  const tenure = parseInt(tenureSlider.value) || 0;
-  const rate = parseFloat(interestRateSlider.value) || 0;
+            if (!loanAmountSlider || !tenureSlider || !interestRateSlider) return;
 
-  // Displays
-  const loanAmountDisplay = document.getElementById("loanAmountDisplay");
-  const tenureDisplay = document.getElementById("tenureDisplay");
-  const interestRateDisplay = document.getElementById("interestRateDisplay");
-  const monthlyEMI = document.getElementById("monthlyEMI");
-  const totalInterest = document.getElementById("totalInterest");
-  const totalPayable = document.getElementById("totalPayable");
+            const principal = parseFloat(loanAmountSlider.value) || 0;
+            const tenure = parseInt(tenureSlider.value) || 0;
+            const rate = parseFloat(interestRateSlider.value) || 0;
 
-  if (loanAmountDisplay)
-    loanAmountDisplay.textContent = formatLargeAmount(principal);
-  if (tenureDisplay)
-    tenureDisplay.textContent =
-      tenure > 12
-        ? `${Math.floor(tenure / 12)} Years ${tenure % 12} Months`
-        : `${tenure} Months`;
-  if (interestRateDisplay) interestRateDisplay.textContent = `${rate}%`;
+            // Update display elements
+            const loanAmountDisplay = document.getElementById("loanAmountDisplay");
+            const tenureDisplay = document.getElementById("tenureDisplay");
+            const interestRateDisplay = document.getElementById("interestRateDisplay");
+            const monthlyEMI = document.getElementById("monthlyEMI");
+            const totalInterest = document.getElementById("totalInterest");
+            const totalPayable = document.getElementById("totalPayable");
 
-  // ✅ EMI calculation
-  const emi = calculateEMI(principal, rate, tenure);
-  const totalAmount = emi * tenure;
-  const totalInterestAmount = totalAmount - principal;
+            if (loanAmountDisplay) loanAmountDisplay.textContent = formatLargeAmount(principal);
+            if (tenureDisplay) {
+                tenureDisplay.textContent = tenure > 12
+                    ? `${Math.floor(tenure / 12)} Years ${tenure % 12} Months`
+                    : `${tenure} Months`;
+            }
+            if (interestRateDisplay) interestRateDisplay.textContent = `${rate}%`;
 
-  // ✅ Update text values
-  if (monthlyEMI) monthlyEMI.textContent = formatCurrency(Math.round(emi));
-  if (totalInterest)
-    totalInterest.textContent = formatLargeAmount(
-      Math.round(totalInterestAmount)
-    );
-  if (totalPayable)
-    totalPayable.textContent = formatLargeAmount(Math.round(totalAmount));
+            // Calculate EMI
+            const emi = calculateEMI(principal, rate, tenure);
+            const totalAmount = emi * tenure;
+            const totalInterestAmount = totalAmount - principal;
 
-  // ✅ Update chart with principal vs interest
-  updateChart(principal, totalInterestAmount);
-  // ✅ Update chart
-  updateChart(principal, totalInterestAmount);
-}
+            // Update result displays
+            if (monthlyEMI) monthlyEMI.textContent = formatCurrency(Math.round(emi));
+            if (totalInterest) totalInterest.textContent = formatLargeAmount(Math.round(totalInterestAmount));
+            if (totalPayable) totalPayable.textContent = formatLargeAmount(Math.round(totalAmount));
+
+            // Update chart
+            updateChart(principal, totalInterestAmount);
+        }
+
+        // Sync input field with slider
+        function syncInputWithSlider(inputId, sliderId, formatter = null) {
+            const input = document.getElementById(inputId);
+            const slider = document.getElementById(sliderId);
+
+            if (!input || !slider) return;
+
+            // Update slider when input changes
+            input.addEventListener('input', function() {
+                let value = parseAmount(this.value);
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+
+                // Clamp value to slider range
+                value = Math.max(min, Math.min(max, value));
+                
+                slider.value = value;
+                this.value = formatter ? formatter(value) : value;
+                updateCalculations();
+            });
+
+            // Update input when slider changes
+            slider.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                input.value = formatter ? formatter(value) : value;
+                updateCalculations();
+            });
+
+            // Format input on blur
+            input.addEventListener('blur', function() {
+                const value = parseAmount(this.value);
+                this.value = formatter ? formatter(value) : value;
+            });
+        }
+
+        // Custom formatter for loan amount (removes currency symbols for input)
+        function loanAmountFormatter(value) {
+            return Math.round(value).toString();
+        }
+
+        // Apply for loan function
+        function applyForLoan() {
+            alert('Redirecting to loan application form...');
+        }
+
+        // Initialize everything when DOM is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sync inputs with sliders
+            syncInputWithSlider('loanAmountInput', 'loanAmount', loanAmountFormatter);
+            syncInputWithSlider('tenureInput', 'tenure');
+            syncInputWithSlider('interestRateInput', 'interestRate');
+
+            // Initial calculation
+            updateCalculations();
+
+            // Set initial input values
+            document.getElementById('loanAmountInput').value = document.getElementById('loanAmount').value;
+            document.getElementById('tenureInput').value = document.getElementById('tenure').value;
+            document.getElementById('interestRateInput').value = document.getElementById('interestRate').value;
+        });
 
 // ================= DOM Ready =================
 document.addEventListener("DOMContentLoaded", () => {
@@ -662,7 +726,7 @@ const sampleData = {
       age: "23 - 55 years",
       productBenefits: [
         "🌐 Instant Online Application",
-      "💸 Collateral-Free Loan",
+        "💸 Collateral-Free Loan",
         "⏱ Instant Loan Approval",
         "👉🏻 Same Day Disbursal",
       ],
