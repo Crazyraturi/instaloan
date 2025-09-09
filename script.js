@@ -250,24 +250,22 @@ document.addEventListener("DOMContentLoaded", () => {
 const testimonialData = [
   {
     name: "Rohit verma",
-    role: "Marketing Manager",
-    image:
-      "https://i.pinimg.com/736x/f6/8b/07/f68b07afcf0acea994b7681e9caaff35.jpg",
-    text: "I was impressed by the clarity and speed of service. Comparing offers from multiple lenders helped me find the best deal.",
+    role: "★ ★ ★ ★ ★",
+    image: "./images/male-testimonial.svg",
+    text: "Taking an InstaLoan Business Loan was the best decision for my company. Quick approval, flexible repayment, and excellent support gave me confidence to grow and manage finances smoothly and effectively",
   },
+
   {
     name: "Shubhamita Das",
-    role: "Business Owner",
-    image:
-      "https://img.freepik.com/free-photo/indian-woman-posing-cute-stylish-outfit-camera-smiling_482257-122351.jpg?semt=ais_hybrid&w=740&q=80",
-    text: "The team exceeded our expectations with their professionalism and quick turnaround. Highly recommended.",
+    role: "★ ★ ★ ★ ★",
+    image: "./images/femail-testimonial.svg",
+    text: "InstaLoan Business Loan truly helped my startup during a critical stage. The fast disbursement, low processing fee, and supportive team made the entire process smooth and stress-free. Highly recommended!",
   },
   {
     name: "Rahul sharma",
-    role: "Product Director",
-    image:
-      "https://plus.unsplash.com/premium_photo-1682089787056-9ac0c78a2ac2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW5kaWFuJTIwcGVvcGxlfGVufDB8fDB8fHww",
-    text: "Working with this company transformed our business operations. Customer-first mentality sets them apart.",
+    role: "★ ★ ★ ★ ★",
+    image: "./images/male-testimonial.svg",
+    text: "With InstaLoan Business Loan, I could expand my business without financial stress. Transparent terms, instant approval, and flexible tenure gave me the freedom to plan confidently and achieve faster growth.",
   },
 ];
 
