@@ -584,7 +584,7 @@ const loanData = {
 const sampleData = {
   personal: [
     {
-      amount: "₹ 2,00,00,000",
+      amount: "₹ 5,00,000",
       rate: "10.99%",
       fee: "1.5% to 2% + + GST",
       tenure: "7 Years",
