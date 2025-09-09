@@ -445,6 +445,56 @@ const loanData = {
       link: "https://loan.indiasales.club?productCode=LPL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=480&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
       image: "./images/lendingplate.png",
     },
+    {
+      name: "Bharat Loan",
+      link: "https://loan.indiasales.club?productCode=BPL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=500&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/bharat.webp",
+    },
+    {
+      name: "Smartcoin (Olyv)",
+      link: "https://tinyurl.com/SMARCOIN2527",
+      image: "./images/Smart_Coin_847bcd1cc3.avif",
+    },
+    {
+      name: "Fi Money",
+      link: "https://loan.indiasales.club?productCode=FI_LOAN&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=368&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/FI_Money_Logo_f8579baa44.avif",
+    },
+    {
+      name: "mPokket",
+      link: "https://loan.indiasales.club?productCode=MPOKKET&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=258&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/1694242888_mpockket_re.svg",
+    },
+    {
+      name: "Ram Fincorp",
+      link: "https://loan.indiasales.club?productCode=RAM_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=497&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/Ram_Fincorp_Logo_31f77c77e2.avif",
+    },
+    {
+      name: "LNT",
+      link: "COMING SOON",
+      image: "./images/lnt_finance_b74f4dee69.avif",
+    },
+    {
+      name: "PAYRUPIK",
+      link: "https://app.adjust.com/1sflo7sv?campaign={digiloans}&adgroup={buddy_loan01}&creative={BDL_dsa}&idfa={af_9}&click_id={click_id}&gps_adid={af_9}&android_id={af_6}&ip_address={af_5}&impression_id={af_7}&install_callback=https%3A%2F%2Futils.follow.whistle.mobi%2Fpixel.php%3Flinkid%3D{click_id}",
+      image: "./images/payrupik.webp",
+    },
+    {
+      name: "Hero Fincorp",
+      link: "https://hipl.onelink.me/1OrE/qdf4ck6o",
+      image: "./images/herofinc.webp",
+    },
+    {
+      name: "FIBE (Early Salary)",
+      link: "https://webportal.fibe.in/easy-loan?utm_source=BUDDYLOANPA&utm_medium=digiloans&campaignid=DSA",
+      image: "./images/fibe.webp",
+    },
+    {
+      name: "Rupee 112",
+      link: "https://loan.indiasales.club?productCode=RUP_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=498&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/rupee112.webp",
+    },
   ],
   business: [
     {
@@ -684,7 +734,7 @@ const sampleData = {
       ],
     },
     {
-      amount: "₹ 2,00,000",
+      amount: "₹ 5,00,000",
       rate: "24%",
       fee: "2% to 5% + GST",
       tenure: "2 Years",
@@ -707,11 +757,11 @@ const sampleData = {
       ],
     },
     {
-      amount: "₹ 2,00,000",
-      rate: "24%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
-      income: "15,000 & above",
+      amount: "₹ 5,00,000",
+      rate: "12%",
+      fee: "2% + GST",
+      tenure: "60 month",
+      income: "20,000 & above",
       age: "23 - 55 years",
       productBenefits: [
         "- No Paperwork required",
@@ -731,9 +781,9 @@ const sampleData = {
         "- 18 months bureau vintage/history of the customer",
       ],
     },
-    // kissht
+
     {
-      amount: "₹ 2,00,000",
+      amount: " ₹ 5,00,000",
       rate: "24%",
       fee: "2% to 5% + GST",
       tenure: "2 Years",
@@ -755,8 +805,9 @@ const sampleData = {
         "6. No settlement/write off in last 36 months",
       ],
     },
+    // kissht
     {
-      amount: "₹ 3,00,000",
+      amount: "₹ 5,00,000",
       rate: "17.99%",
       fee: "3% to 5%  + GST",
       tenure: "3 Years",
