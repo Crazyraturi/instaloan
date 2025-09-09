@@ -279,6 +279,17 @@ body {
   transform: translateY(0);
 }
 
+/* Navbar translucent in mobile view */
+@media (max-width: 991px) {
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.7); /* white with opacity */
+    backdrop-filter: blur(10px); /* blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+     padding:10px !important;
+  }
+}
+
+
 /* why you should parterner use */
 
 .dl-hero-section {
