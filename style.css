@@ -100,6 +100,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+ 
 }
 
 .dl-hero-content {
@@ -279,6 +280,8 @@ body {
   min-height: 80vh;
   position: relative;
   overflow: hidden;
+  margin: auto;
+  padding: 20px 50px;
 }
 
 .dl-hero-section::before {
@@ -346,7 +349,7 @@ body {
 
 .dl-main-profile {
   position: relative;
-  z-index: 3;
+  display: inline-block;
 }
 
 .dl-main-profile img {
@@ -971,17 +974,19 @@ body {
         .input-section {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 50px;
         }
 
         .input-group-enhanced {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            
+          
         }
 
         .input-label-enhanced {
-            font-size: 16px;
+            font-size: 21px;
             font-weight: 600;
             color: #374151;
             display: flex;
@@ -1061,7 +1066,7 @@ body {
             display: flex;
             justify-content: space-between;
             margin-top: 5px;
-            font-size: 12px;
+            font-size: 18px;
             color: #6b7280;
         }
 
@@ -1071,7 +1076,7 @@ body {
             padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 10px;
         }
 
         .monthly-emi-display {
@@ -1819,4 +1824,125 @@ background: linear-gradient(90deg, #00c6ff, #0072ff) !important;
     opacity: 1;
     transform: scale(1);
   }
+}
+
+
+  
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .content-wrapper {
+            z-index: 2;
+            position: relative;
+        }
+
+        .title-primary {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white !important;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+          color: white !important;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .services-list {
+            list-style: none;
+            margin: 1.5rem 0;
+             color: white !important;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: white !important;
+        }
+
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+             color: white !important;
+        }
+
+       
+        /* Image Section */
+        .image-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accent-circle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            opacity: 0.3;
+            z-index: 1;
+            top: 50px;
+            right: 600px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .accent-circle-small {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .main-profile {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-image {
+  position: relative;
+  z-index: 2;
+  border-radius: 20px;
+}
+
+.secondary-image {
+  position: absolute;
+  left: 80%;   /* adjust as needed */
+  top: 60px;    /* adjust as needed */
+  z-index: 1;
+  opacity: 0.95; /* optional: make it slightly faded */
+  width: 60%;    /* adjust as needed */
+  pointer-events: none;
+  border-radius: 20px;
 }
