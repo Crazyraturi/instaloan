@@ -116,9 +116,9 @@ body {
   margin-bottom: 2rem;
 }
 
-@media(max-width=400px){
+@media(max-width:576px){
   .title-primary{
-    font-size: 32px;
+    font-size: 32px !important;
   }
 }
 
@@ -1433,6 +1433,14 @@ body {
   font-weight: 600;
   padding: 10px 20px;
   transition: all 0.3s ease;
+
+}
+@media (max-width:576px) {
+  .apply-btn {
+    font-size: 15px !important;
+    margin-left: 10px !important;
+  }
+  
 }
 
 .partner-btn {
@@ -1952,10 +1960,9 @@ background: linear-gradient(90deg, #00c6ff, #0072ff) !important;
   pointer-events: none;
   border-radius: 20px;
 }
-
 .high-disbursement-icon {
-  color: #f6f6f6;        /* blue color */
-  font-size: 1rem;     /* adjust size as needed */
+  color: #f6f6f6;        
+  font-size: 1rem;     
   animation: blink 1.2s infinite;
 }
 
@@ -1965,17 +1972,25 @@ background: linear-gradient(90deg, #00c6ff, #0072ff) !important;
   100% { opacity: 1; }
 }
 
-
 .high-disbursement-tag {
   background: linear-gradient(135deg, #007bff, #0056b3); /* Blue gradient */
   color: #fff;
-  font-size: 0.7rem;      /* smaller text */
+  font-size: 0.7rem;      
   font-weight: 600;
-  padding: 4px 14px;      /* smaller padding */
+  padding: 4px 14px;      
   box-shadow: 0 2px 5px rgba(0, 91, 187, 0.3);
   letter-spacing: 0.3px;
   text-transform: uppercase;
   border-radius: 10px;
-  
 }
 
+/* ✅ Hide on phones (<= 576px) */
+@media (max-width: 576px) {
+  .high-disbursement-tag {
+    display: none !important;
+       font-size: 0.5rem;
+  }
+  .high-disbursement-icon{
+    display: none !important;
+  }
+}
