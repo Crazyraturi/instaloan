@@ -651,7 +651,7 @@ const sampleData = {
     },
     // aditya brla personal loan
     {
-      amount: "₹ ₹ 5,00,000",
+      amount: "₹ 5,00,000",
       rate: "13.25%",
       fee: "1.75% to 4.75%  + GST",
       tenure: "4 Years",
