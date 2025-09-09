@@ -438,11 +438,7 @@ const loanData = {
       link: "https://loan.indiasales.club?productCode=LPL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=480&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
       image: "./images/lendingplate.png",
     },
-    {
-      name: "InCred",
-      link: "https://www.incred.com/personal-loan/?partnerId=8313827854371024P&utm_source=DSA&utm_medium=digiloans&utm_campaign=Buddyloan",
-      image: "./images/increed.svg",
-    },
+    
   ],
   business: [
     {
