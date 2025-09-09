@@ -1316,7 +1316,7 @@ function createLoanCard(vendor, index, type) {
   const isComingSoon = vendor.link === "COMING SOON" || !vendor.link;
   const cardId = `${type}-${index}`;
 
-  const isBest = index < 5 && type === "instant";
+  const isBest = index < 6 && type === "instant";
 
   
 
