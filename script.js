@@ -385,6 +385,19 @@ function toggleFaq(link) {
 const loanData = {
   personal: [
     {
+      name: "InCred",
+      link: "https://www.incred.com/personal-loan/?partnerId=8313827854371024P&utm_source=DSA&utm_medium=digiloans&utm_campaign=Buddyloan",
+      image: "./images/increed.svg",
+    },
+    {
+      name: "IDFC FIRST Bank",
+      link: "https://www.idfcfirstbank.com/personal-loan/apply-online?utm_source=Partner&utm_medium=DSA&utm_campaign=digiloans",
+      image: "./images/IDFC_First_Bank_d21b7112b9.avif",
+    },
+  ],
+
+  instant: [
+    {
       name: "Poonawalla Fincorp",
       link: "https://instant-pocket-loan.poonawallafincorp.com/?utm_DSA_Code=PKA00192&UTM_Partner_Name=BuddyLoan&UTM_Partner_Medium=digiloans&UTM_Partner_AgentCode=DSA&UTM_Partner_ReferenceID=PK2002",
       image: "./images/punewala.svg",
@@ -567,6 +580,55 @@ const loanData = {
 const sampleData = {
   personal: [
     {
+      amount: "₹ 2,00,000",
+      rate: "24%",
+      fee: "2% to 5% + GST",
+      tenure: "2 Years",
+      income: "15,000 & above",
+      age: "23 - 55 years",
+      productBenefits: [
+        "🌐 Instant Online Application",
+        "💸 Collateral-Free Loan",
+        "⏱ Instant Loan Approval",
+        "👉🏻 Same Day Disbursal",
+      ],
+      whomToSale: [
+        "1. Available for both salaried and self employed",
+        "2. Minimum Monthly Income:",
+        "(a) Salaried: ₹25,000s",
+        "(b) Self Employed: ₹25,000",
+        "3. Age: 23-56 years",
+        "Festival and shopping expenses",
+        "5. Available in limited location",
+      ],
+    },
+    {
+      amount: "₹ 2,00,000",
+      rate: "24%",
+      fee: "2% to 5% + GST",
+      tenure: "2 Years",
+      income: "15,000 & above",
+      age: "23 - 55 years",
+      productBenefits: [
+        "💼 Get an Instant Personal Loan from IDFC First Bank",
+        "🌟 Approved Loan Offer upto ₹10 Lakhs",
+        "💸 Withdraw funds with flexible EMI dates",
+        "🔓 Repay anytime with ZERO foreclosure charges",
+        "📉 ROI Starting from 9.99% P.A",
+        "📆 Flexible Tenure: 9 - 60 Months",
+      ],
+      whomToSale: [
+        "1. Age: 25- 60 Years",
+        "2. CIBIL Score Above 730",
+        "3. Processing fees of up to 2% will be deducted from the loan amount at the time of disbursal.",
+        "4. Available for both salaried and self-employed individuals",
+        "5. List of documents needed: Display your PAN card for the VKYC verification.",
+        "6. NTB (New to Bank): Customer shouldn’t have any relations with IDFC First Bank (Savings A/c, Loan, Credit Card etc)",
+      ],
+    },
+  ],
+  instant: [
+    {
       amount: "₹ 5,00,000",
       rate: "18%",
       fee: "2% to 4% + GST",
@@ -715,29 +777,6 @@ const sampleData = {
         "5. List of documents needed- Photograph, Aadhaar card & PAN card.",
         "6. Loan service only for Indian cities.",
         "7. Aadhaar card must be linked with a registered mobile number.",
-      ],
-    },
-    {
-      amount: "₹ 2,00,000",
-      rate: "24%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
-      income: "15,000 & above",
-      age: "23 - 55 years",
-      productBenefits: [
-        "🌐 Instant Online Application",
-        "💸 Collateral-Free Loan",
-        "⏱ Instant Loan Approval",
-        "👉🏻 Same Day Disbursal",
-      ],
-      whomToSale: [
-        "1. Available for both salaried and self employed",
-        "2. Minimum Monthly Income:",
-        "(a) Salaried: ₹25,000s",
-        "(b) Self Employed: ₹25,000",
-        "3. Age: 23-56 years",
-        "Festival and shopping expenses",
-        "5. Available in limited location",
       ],
     },
   ],
@@ -1276,6 +1315,7 @@ function createLoanCard(vendor, index, type) {
   const data = getRandomData(type, index);
   const isComingSoon = vendor.link === "COMING SOON" || !vendor.link;
   const cardId = `${type}-${index}`;
+  
 
   return `
     <div class="loan-card p-4 mb-4">
@@ -1506,7 +1546,8 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM loaded, initializing loan cards...");
 
   // Render all loan card types
-  renderLoanCards("personal", "personalLoansContainer");
+  renderLoanCards("instant", "instantLoansContainer");
+  renderLoanCards("personal", "personalLoanContainer");
   renderLoanCards("business", "businessLoansContainer");
   renderLoanCards("emi", "emiCardsContainer");
   renderLoanCards("credit", "creditCardsContainer");
