@@ -1946,3 +1946,33 @@ background: linear-gradient(90deg, #00c6ff, #0072ff) !important;
   pointer-events: none;
   border-radius: 20px;
 }
+.best-badge {
+  position: absolute;
+  top: 8px;
+  left: -12px;
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Blue gradient */
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 14px;
+  transform: rotate(-45deg);
+  box-shadow: 0 3px 8px rgba(0, 91, 187, 0.4);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  animation: glowPulse 2s infinite;
+}
+
+/* Subtle glowing effect */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.6), 0 0 12px rgba(0, 123, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(0, 123, 255, 0.8), 0 0 20px rgba(0, 123, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.6), 0 0 12px rgba(0, 123, 255, 0.4);
+  }
+}
+

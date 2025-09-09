@@ -580,12 +580,12 @@ const loanData = {
 const sampleData = {
   personal: [
     {
-      amount: "₹ 2,00,000",
-      rate: "24%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
-      income: "15,000 & above",
-      age: "23 - 55 years",
+      amount: "₹ 2,00,00,000",
+      rate: "10.99%",
+      fee: "1.5% to 2% + + GST",
+      tenure: "7 Years",
+      income: "	20,000 & above",
+      age: "	23 - 60 years",
       productBenefits: [
         "🌐 Instant Online Application",
         "💸 Collateral-Free Loan",
@@ -603,12 +603,12 @@ const sampleData = {
       ],
     },
     {
-      amount: "₹ 2,00,000",
-      rate: "24%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
-      income: "15,000 & above",
-      age: "23 - 55 years",
+      amount: "₹ 1,00,00,000",
+      rate: "10.99%",
+      fee: "1.5% to 2% + GST",
+      tenure: "7 Years",
+      income: "	20,000 & above",
+      age: "	23 - 60 years",
       productBenefits: [
         "💼 Get an Instant Personal Loan from IDFC First Bank",
         "🌟 Approved Loan Offer upto ₹10 Lakhs",
@@ -1315,10 +1315,14 @@ function createLoanCard(vendor, index, type) {
   const data = getRandomData(type, index);
   const isComingSoon = vendor.link === "COMING SOON" || !vendor.link;
   const cardId = `${type}-${index}`;
+
+  const isBest = index < 5 && type === "instant";
+
   
 
   return `
-    <div class="loan-card p-4 mb-4">
+    <div class="loan-card p-4 mb-4 position-relative">
+    ${isBest ? `<div class="best-badge">Best</div>` : ""}
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center">
           <img src="${vendor.image}"  alt="${vendor.name}" class="vendor-logo">
