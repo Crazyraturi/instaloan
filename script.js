@@ -1322,7 +1322,7 @@ function createLoanCard(vendor, index, type) {
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center">
           <img src="${vendor.image}"  alt="${vendor.name}" class="vendor-logo">
-          <h5 class=" ms-5 fs-6 text-primary mt-1">${vendor.name}</h5>
+          
           
         </div>
         
