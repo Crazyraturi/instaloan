@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ================= DOM Ready =================
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("App Initialized");
+console.log("App Initialized");
 
   // Loan Calculator listeners
   document
@@ -267,6 +267,7 @@ const testimonialData = [
     image: "./images/male-testimonial.svg",
     text: "With InstaLoan Business Loan, I could expand my business without financial stress. Transparent terms, instant approval, and flexible tenure gave me the freedom to plan confidently and achieve faster growth.",
   },
+
 ];
 
 let currentTestimonialIndex = 0;
@@ -433,7 +434,7 @@ const loanData = {
     {
       name: "Kissht",
       link: "https://kissht.onelink.me/I5a1?af_xp=custom&pid=Buddyloan01&c=Buddyloan01&is_retargeting=true&af_reengagement_window=3d&af_sub1=digiloans&af_click_lookback=30d",
-      image: "./images/kissht.webp",
+      image: "./images/kissht-logo.png",
     },
     {
       name: "KreditBee",
@@ -478,7 +479,7 @@ const loanData = {
     {
       name: "PAYRUPIK",
       link: "https://app.adjust.com/1sflo7sv?campaign={digiloans}&adgroup={buddy_loan01}&creative={BDL_dsa}&idfa={af_9}&click_id={click_id}&gps_adid={af_9}&android_id={af_6}&ip_address={af_5}&impression_id={af_7}&install_callback=https%3A%2F%2Futils.follow.whistle.mobi%2Fpixel.php%3Flinkid%3D{click_id}",
-      image: "./images/payrupik.webp",
+      image: "./images/payrupik.png",
     },
     {
       name: "Hero Fincorp",
@@ -494,6 +495,11 @@ const loanData = {
       name: "Rupee 112",
       link: "https://loan.indiasales.club?productCode=RUP_PL&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=498&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
       image: "./images/rupee112.webp",
+    },
+    {
+      name: "Zype Personal Loan",
+      link: "https://loan.indiasales.club?productCode=ZYPE&journeyId=1&shortCode=1i2PwQUfAwmwtH3etD4R6&subCode=l&productTypeId=357&productType=Personal%20Loan&memberId=4HC66777&transitionId=2e39ea5d-e3db-4159-91c3-0631353ebeb3",
+      image: "./images/Zype_1_bf0dfd1242.avif",
     },
   ],
   business: [
@@ -631,34 +637,36 @@ const loanData = {
 // Fixed sample data structure
 const sampleData = {
   personal: [
+    // increed
     {
       amount: "₹ 5,00,000",
-      rate: "10.99%",
-      fee: "1.5% to 2% + + GST",
-      tenure: "7 Years",
-      income: "	20,000 & above",
-      age: "	23 - 60 years",
+      rate: "1.33% per month",
+      fee: " 2% + GST",
+      tenure: "60 month",
+      income: "	 13,500  & above",
+      age: "	21 - 57 years",
       productBenefits: [
-        "🌐 Instant Online Application",
-        "💸 Collateral-Free Loan",
-        "⏱ Instant Loan Approval",
-        "👉🏻 Same Day Disbursal",
+        "💸 Flexible loan from ₹5,000 to ₹5 lakh",
+        "💰 Loan repayment tenure up to 60 month",
+        "⏱ Instant approval in 2 minutes, 24 hour disbursal",
+        "🤩 Interest rate starting 1.33% per month",
+        "💁🏻‍♀️ Processing Fees: starting from 2%",
       ],
       whomToSale: [
         "1. Available for both salaried and self employed",
-        "2. Minimum Monthly Income:",
-        "(a) Salaried: ₹25,000s",
-        "(b) Self Employed: ₹25,000",
-        "3. Age: 23-56 years",
-        "Festival and shopping expenses",
-        "5. Available in limited location",
+        "2. Monthly income > 13,500 (Bank Account)",
+        "3. Credit Score > 600",
+        "4. Age: 21-57 years",
+        "5. No payment delays of more than 15 days in any previous EMIs",
+        "6. No settlement/write off in last 36 months",
       ],
     },
+    // IDFC
     {
-      amount: "₹ 1,00,00,000",
+      amount: "₹ 10,00,000",
       rate: "10.99%",
       fee: "1.5% to 2% + GST",
-      tenure: "7 Years",
+      tenure: "9 - 60 Months",
       income: "	20,000 & above",
       age: "	23 - 60 years",
       productBenefits: [
@@ -684,7 +692,7 @@ const sampleData = {
     {
       amount: "₹5,00,000",
       rate: "18%",
-      fee: "	2.5% to 3.5% + GST",
+      fee: "	2% to 4% + GST",
       tenure: "3 Years",
       income: "20,000 & above",
       age: "22 - 58 years",
@@ -737,10 +745,10 @@ const sampleData = {
     {
       amount: "₹ 5,00,000",
       rate: "17.99%",
-      fee: "2% to 5% + GST",
-      tenure: "2 Years",
+      fee: "3% to 5% + GST",
+      tenure: "3 Years",
       income: "15,000 & above",
-      age: "23 - 55 years",
+      age: "22 - 55 years",
       productBenefits: [
         "🤠 Loan of up to ₹5 Lakh for - Salaried | Self Employed ",
         "📝 Zero Paperwork",
@@ -836,31 +844,7 @@ const sampleData = {
         "7. Aadhaar card must be linked with a registered mobile number.",
       ],
     },
-    {
-      amount: "₹5,00,000",
-      rate: "18%",
-      fee: "	2.5% to 3.5% + GST",
-      tenure: "3 Years",
-      income: "20,000 & above",
-      age: "22 - 58 years",
-      productBenefits: [
-        "💸 Get Instant Personal Loan Online Upto ₹5 Lakhs",
-        "🌐 100% Online Application",
-        "🚫 Zero Hidden Charges",
-        "🔓 Collateral-Free",
-        "📄 Minimal Documentation",
-        "✅ No Foreclosure Charges (if paid from own sources)",
-      ],
-      whomToSale: [
-        "Age: Between 24 and 55 years",
-        "CIBIL Score 720 +",
-        "Citizenship: The applicant must be an Indian citizen.",
-        "Available for both Salaried and Self-Employed",
-        "Annual Household Income: Minimum annual household income (declared) must be ₹3 lakh.",
-        "KYC Documents: PAN Card/Aadhaar Card/Driving License/Voter ID/Passport",
-      ],
-    },
-    //  credbee
+    //  Kredit bee
     {
       amount: "₹ 3,00,000",
       rate: "13.25%",
@@ -869,15 +853,19 @@ const sampleData = {
       income: "20,000 & above",
       age: "23 - 60 years",
       productBenefits: [
+        "COUPON CODE: DSA100 - Up to 100% off on processing fees",
+        "COUPON CODE: KRED50 - Up to 50℅ off on PF for General users",
+        "COUPON CODE: EASY50 - Flat 50% off on PF for eligible users",
+
+        "💰 Loans ranging from ₹1,000 to ₹3 Lakhs",
         "🤩 Easy application process.",
-        "🗓 Flexible tenure from 12 to 48 Months",
         "📱 Digital processing and 10-minute loan disbursal.",
         "💲 Interest rate from 1.02% - 2.49% p.m.",
         "😇 No collateral is required to apply for a Personal Loan.",
         "🇮🇳 Service Eligible for PAN India.",
       ],
       whomToSale: [
-        "1. Age: 23 to 60 years",
+        "1. Age: 21-50 years",
         "2. Monthly Income should be more than ₹10,000",
         "3. Available only for android users.",
         "4. Loans are available both for salaried & self-employed",
@@ -895,12 +883,15 @@ const sampleData = {
       income: "15,000 & above",
       age: "23 - 55 years",
       productBenefits: [
+        "Get Instant Access to Funds with Lendingplate Personal Loans",
         "🌐 Instant Online Application",
         "💸 Collateral-Free Loan",
         "📊 Flexible Loan Amounts",
         "❌ No Hidden Charges",
         "⚡ Fast Access to Funds",
+        "Loan Amount - upto ₹2.5 Lakh",
         "🔒 Secure Process",
+        "ROI from 24%* p.a.",
       ],
       whomToSale: [
         "1.Age: 21- 60 Years",
@@ -925,6 +916,7 @@ const sampleData = {
         "❌ No collateral or credit check needed ",
         "🖥️ 100% online and hassle-free process",
         "💸 Loan amounts from ₹5,000 to ₹1 Lac",
+        "The customer will be eligible for only one of the two specific products — either Bharat Loan or Rupee112 Personal Loan, not both.",
       ],
       whomToSale: [
         "Age 25 to 50 years",
@@ -944,20 +936,22 @@ const sampleData = {
       income: "15,000 & above",
       age: "23 - 55 years",
       productBenefits: [
-        "⏳ Instant loan approval",
-        "🧑🏻‍💻 Available for both salaried & self employed",
-        "💰 Loan up to ₹1 Lakh",
-        "📱 100% digital",
-        "Limited time Offer: 50% off upto 250Rs on Processing Fee of the loan",
-        "Discount Coupon Code - DADA50",
+        "🚀 Interest rates: Starting 0.8% per month",
+        "💸 Flexible loans: ₹25,000 to ₹5,00,000",
+        "0️⃣ Zero pre-closure fees (for Liquiloans)",
+        "📲 Approval: 100% digital & paperless",
+        "😮 Lenders: Moneyview, Aditya Birla Capital, Fi loans",
       ],
       whomToSale: [
-        "1. Available for salaried and self employed both",
-        "2. Monthly income > 13,500 (Bank Account)",
-        "3. Credit Score > 600",
-        "4. Age: 21 to 57 Years",
-        "5. No payment delays of more than 15 days in any previous EMIs",
-        "6. No settlement/write off in last 36 months",
+        "1. Only for Salaried peopleh",
+        "2. Age: 23 to 60 years old",
+        "3. Experian score >780",
+        "4. Monthly Income > 25,000",
+        "6. PAN And Aadhaar should be theres",
+        "7. D.O.B. on pan and Aadhar should match",
+        "8. User must apply from his own device and mobile number",
+        "9. No loan/credit defaults, write-offs should be there",
+        "10. No delays in other loan/credit payments over 30 days",
       ],
     },
     // mpocket
@@ -969,6 +963,8 @@ const sampleData = {
       income: "18,000 & above",
       age: "22 - 55 years",
       productBenefits: [
+        "Instant Personal Loan for students and salaried employees from mPokket.",
+        "👩🏻‍🎓 Loan up to ₹500 for students and ₹2000 for salaried employees",
         "🤵🏻 Available for New to Credit customers",
         "💳 No credit score required",
         "📱 Fully digital and paperless journey",
@@ -989,6 +985,9 @@ const sampleData = {
         "- Last 3 month bank statement,",
         "- Last salary slip/ Offer Letter/ Joining Letter",
         "- Voter Card/ Driving License/ Passport/ Aadhaar,",
+        "- PAN Card",
+        "- Last 3 month bank statement,",
+        "- Last salary slip/ Offer Letter/ Joining Letter",
       ],
     },
     // ramfincrop
@@ -1007,6 +1006,8 @@ const sampleData = {
         "📆 Flexible repayment up to 3 months",
         "🚫 No foreclosure fees – close anytime",
         "📲 100% online – no calls, no queues, no hassle",
+        "Loan Amount upto Two Lakhs.",
+        "ROI from 36% p.a.",
       ],
       whomToSale: [
         "- Age 18 to 58 years",
@@ -1018,6 +1019,34 @@ const sampleData = {
       ],
     },
     // lt  finance
+    {
+      amount: "₹ 30,00,000",
+      rate: "11%",
+      fee: "1% to 3.5%  + GST",
+      tenure: "7 Years",
+      income: "20,000 & above",
+      age: "21 - 65 years",
+      productBenefits: [
+        "📱 100% digital application and verification Process",
+        "🗓 Flexible tenure from 12 to 48 Months",
+        "💸 Instant Loan Up to ₹5 Lakhse",
+        "🙆🏻‍♂️ Only for salaried employees",
+        "⏱ Instant Disbursal ",
+      ],
+      whomToSale: [
+        "1. Age: 23 to 60 years",
+        "2. For salaried employees Only",
+        "3.Verification by EPFO and Work Email OTP. ",
+        "4.3. Credit Score >725",
+        "5. Min Monthly Income:",
+        "- Tier 1 & Tier 2 >= ₹30000",
+        "- Tier 3 & Tier 4 >= ₹25000",
+        "6. Delay/overdue on other loan/credit payments should be less than 30 days in last 3 Months",
+        "7. Overdue amount for credit card can’t be more than ₹10,000",
+        "8. Number of personal loan or credit card enquiries on bureau should be less then 5 in the last 3 months",
+      ],
+    },
+    // payrupik
     {
       amount: "₹ 30,00,000",
       rate: "11%",
@@ -1118,36 +1147,33 @@ const sampleData = {
         "Min monthly income - INR 30,000 per month",
         "Only for Salaried Person",
         "Salary must be credited into the bank",
-        
       ],
     },
-    // kissht
+    // zype
     {
-      amount: "₹ 5,00,000",
-      rate: "17.99%",
-      fee: "3% to 5%  + GST",
-      tenure: "3 Years",
-      income: "18,000 & above",
-      age: "22 - 55 years",
+      amount: " ₹ 2,00,000",
+      rate: "18%",
+      fee: "2% to 6% + GST",
+      tenure: "1 Years",
+      income: "20,000 & above",
+      age: "21 - 45 years",
       productBenefits: [
-        "COUPON CODE: DSA100 - Up to 100% off on processing fees ",
-        "COUPON CODE: KRED50 - Up to 50℅ off on PF for General users",
-        "COUPON CODE: EASY50 - Flat 50% off on PF for eligible users",
-        "💰 Loans ranging from ₹1,000 to ₹3 Lakhs",
-        "🤩 Easy application process.",
-        "📱 Digital processing and 10-minute loan disbursal.",
-        "💲 Interest rate from 1.02% - 2.49% p.m",
-        "😇 No collateral is required to apply for a Personal Loan.",
-        "🇮🇳 Service Eligible for PAN India.",
+        "💸 Instant Personal Loan of up to ₹5 Lakhs",
+        "🗓 Flexible Tenure of up to 36 months",
+        "👉🏻 Processing Fees: 2%-4% + GST",
+        "📊 Lower Interest Rates",
+        "📲 Fully Digital Process",
+        "⏱ Instant Approval in 6 minutes with Quick Disbursal",
+        "Loan Amount Upto ₹5,00,000",
+        "ROI from 18%",
       ],
       whomToSale: [
-        "1. Age: 21-50 years",
-        "2. Monthly Income should be more than ₹10,000",
-        "3. Available only for android users.",
-        "4. Loans are available both for salaried & self-employed.",
-        "5. List of documents needed- Photograph, Aadhaar card & PAN card.",
-        "6. Loan service only for Indian cities.",
-        "7. Aadhaar card must be linked with a registered mobile number.",
+        "1. Age: 21-45 years",
+        "2. Only Salaried Employees",
+        "4. Credit Score > 650",
+        "5. No payment defaults or delay in last 12 months",
+        "6. No write offs within last 12 months",
+        "7. Not working in following industries - Agriculture, Arms and ammunition, Chit fund, Dal milling, Film production and distribution, Import and Export, security services",
       ],
     },
   ],
@@ -1260,6 +1286,7 @@ const sampleData = {
     },
   ],
   credit: [
+    // Uni GoldX Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1281,6 +1308,7 @@ const sampleData = {
         "4. Age - 21 to 60",
       ],
     },
+    //Scapia Federal Bank Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1310,6 +1338,7 @@ const sampleData = {
         "Aadhaar card, or any other government-approved ID",
       ],
     },
+    // IndusInd Bank Tiger Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1331,6 +1360,7 @@ const sampleData = {
         "- Salaried and Self-employed (based on bank criteria)",
       ],
     },
+    // AU Small Finance Bank Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1356,6 +1386,7 @@ const sampleData = {
         "5. PAN & Aadhaar mandatory",
       ],
     },
+    // ICICI Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1378,6 +1409,7 @@ const sampleData = {
         "5. Multicarding sourcing is not allowed(no payout for existing ICICI Card holders)",
       ],
     },
+    // IndianOil RBL Bank XTRA Credit_Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1395,6 +1427,7 @@ const sampleData = {
       ],
       whomToSale: [""],
     },
+    // YES Bank POP-CLUB Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1416,6 +1449,7 @@ const sampleData = {
         "4. You will get your payout only after the card is activated by the customer.",
       ],
     },
+    // BPCL SBI Credit_Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1435,6 +1469,7 @@ const sampleData = {
         "Existing credit card holders of SBI are not eligible for the payout",
       ],
     },
+    // RBL Shoprite Credit_Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1460,6 +1495,7 @@ const sampleData = {
         "- New to RBL customer (Customer with existing bank account or credit card of RBL are not eligible for payout)",
       ],
     },
+    // KIWI Rupay Credit Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1481,7 +1517,7 @@ const sampleData = {
         "3. CIBIL Score > 720",
       ],
     },
-    // tataneu
+    //Tata Neu HDFC Bank Credit_Card
     {
       limit: "₹ 3,00,000",
       rate: "13%",
@@ -1657,10 +1693,12 @@ const sampleData = {
       income: "25,000 & above",
       age: "21 - 65 years",
       productBenefits: [
+        "✨Get Yourself a SBI Credit Card✨",
         "💳 Easy & secure payments",
         "🏆 Reward Points on spends",
         "🍴 Dining, travel & lifestyle offers",
-        "✅ Fee waived on ₹2.5L annual spend💸 Cashback & discounts",
+        "💸 Cashback & discounts",
+        "Apply now & enjoy smarter shopping! 🎉",
       ],
       whomToSale: [
         "Age: 23 years and above",
