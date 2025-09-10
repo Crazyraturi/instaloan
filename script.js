@@ -926,6 +926,29 @@ const sampleData = {
         "Salary must be credited into the bank",
       ],
     },
+    {
+      amount: "₹ 1,00,000",
+      rate: "12%",
+      fee: "2% + GST",
+      tenure: "60 month",
+      income: "20,000 & above",
+      age: "23 - 55 years",
+      productBenefits: [
+        "-⏱️ Instant loan disbursal in just 30 minutes",
+        "📄 Minimal documentation required",
+        "❌ No collateral or credit check needed ",
+        "🖥️ 100% online and hassle-free process",
+        "💸 Loan amounts from ₹5,000 to ₹1 Lac",
+        "The customer will be eligible for only one of the two specific products — either Bharat Loan or Rupee112 Personal Loan, not both.",
+      ],
+      whomToSale: [
+        "Age 25 to 50 years",
+        "NTC Allowed",
+        "Min monthly income - INR 30,000 per month",
+        "Only for Salaried Person",
+        "Salary must be credited into the bank",
+      ],
+    },
     //fi
 
     {
